@@ -1,20 +1,20 @@
 
-package TranserObject;
+package TransferObject;
 
 public class Pozo {
     private String cantidadDeProductoExtraido;
     private String equipo;
 
-    public Pozo(){
-        this.cantidadDeProductoExtraido="null";
-        this.equipo="null";
+    public Pozo() {
+        this.cantidadDeProductoExtraido = "null";
+        this.equipo = "null";
     }
-    
-    public Pozo(String cantidadDeProductoExtraido,String equipo){
-        this.cantidadDeProductoExtraido=cantidadDeProductoExtraido;
-        this.equipo=equipo;
+
+    public Pozo(String cantidadDeProductoExtraido, String equipo) {
+        this.cantidadDeProductoExtraido = cantidadDeProductoExtraido;
+        this.equipo = equipo;
     }
-    
+
     public String getCantidadDeProductoExtraido() {
         return cantidadDeProductoExtraido;
     }
@@ -30,6 +30,5 @@ public class Pozo {
     public void setEquipo(String equipo) {
         this.equipo = equipo;
     }
-    
-    
+
 }

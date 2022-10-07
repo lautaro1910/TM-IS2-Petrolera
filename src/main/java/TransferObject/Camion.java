@@ -1,8 +1,9 @@
-package TranserObject;
+package TransferObject;
 
-enum TipoCamion{
+enum TipoCamion {
     porta, carreton, chupa, grua, batea, tracker;
 }
+
 public class Camion {
     private String fechaInicioServicio;
     private String fechaFinServicio;
@@ -10,20 +11,22 @@ public class Camion {
     private String horasServicio;
     private TipoCamion tipoCamion;
 
-    public Camion(){
-        this.fechaInicioServicio="null";
-        this.fechaFinServicio="null";
-        this.mercancia="null";
-        this.horasServicio="null";
+    public Camion() {
+        this.fechaInicioServicio = "null";
+        this.fechaFinServicio = "null";
+        this.mercancia = "null";
+        this.horasServicio = "null";
     }
-    
-    public Camion(String fechaInicioServicio,String fechaFinServicio,String mercancia,String horasServicio,TipoCamion tipoCamion){
-        this.fechaInicioServicio=fechaInicioServicio;
-        this.fechaFinServicio=fechaFinServicio;
-        this.mercancia=mercancia;
-        this.horasServicio=horasServicio;
-        this.tipoCamion=tipoCamion;
+
+    public Camion(String fechaInicioServicio, String fechaFinServicio, String mercancia, String horasServicio,
+            TipoCamion tipoCamion) {
+        this.fechaInicioServicio = fechaInicioServicio;
+        this.fechaFinServicio = fechaFinServicio;
+        this.mercancia = mercancia;
+        this.horasServicio = horasServicio;
+        this.tipoCamion = tipoCamion;
     }
+
     public String getFechaInicioServicio() {
         return fechaInicioServicio;
     }
@@ -63,5 +66,5 @@ public class Camion {
     public void setTipoCamion(TipoCamion tipoCamion) {
         this.tipoCamion = tipoCamion;
     }
-    
+
 }

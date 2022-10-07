@@ -1,9 +1,10 @@
 
 package BusinessObject;
-import TranserObject.Yacimiento;
+
+import TransferObject.Yacimiento;
 
 public class ManagerYacimiento {
-    public Yacimiento ingresoDatos(String localizacion,int estadoYacimiento, String nombreYacimiento){
+    public Yacimiento ingresoDatos(String localizacion, int estadoYacimiento, String nombreYacimiento) {
         Yacimiento yacimiento = new Yacimiento();
 
         yacimiento.setLocalizacionOrigen(localizacion);
@@ -13,7 +14,7 @@ public class ManagerYacimiento {
         return yacimiento;
     }
 
-    public Yacimiento pasoDatos(Yacimiento yacimiento){
+    public Yacimiento pasoDatos(Yacimiento yacimiento) {
         Yacimiento yacimientoAux = new Yacimiento();
 
         yacimientoAux.setLocalizacionOrigen(yacimiento.getLocalizacionOrigen());

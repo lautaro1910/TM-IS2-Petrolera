@@ -1,4 +1,4 @@
-package TranserObject;
+package TransferObject;
 
 public class Empleado {
     private String nombre;
@@ -9,26 +9,27 @@ public class Empleado {
     private String telefono;
     private int numInterno;
 
-    public Empleado(){
-        this.nombre="null";
-        this.apellido="null";
-        this.DNI="null";
-        this.estado=0;
-        this.diagrama="null";
-        this.telefono="null";
-        this.numInterno=0;
+    public Empleado() {
+        this.nombre = "null";
+        this.apellido = "null";
+        this.DNI = "null";
+        this.estado = 0;
+        this.diagrama = "null";
+        this.telefono = "null";
+        this.numInterno = 0;
     }
-    
-    public Empleado(String nombre,String apellido,String DNI,int estado, String diagrama, String telefono, int numInterno){
-        this.nombre=nombre;
-        this.apellido=apellido;
-        this.DNI=DNI;
-        this.estado=estado;
-        this.diagrama=diagrama;
-        this.telefono=telefono;
-        this.numInterno=numInterno;
+
+    public Empleado(String nombre, String apellido, String DNI, int estado, String diagrama, String telefono,
+            int numInterno) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.DNI = DNI;
+        this.estado = estado;
+        this.diagrama = diagrama;
+        this.telefono = telefono;
+        this.numInterno = numInterno;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -44,7 +45,7 @@ public class Empleado {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    
+
     public String getDNI() {
         return DNI;
     }
@@ -84,6 +85,5 @@ public class Empleado {
     public void setNumInterno(int numInterno) {
         this.numInterno = numInterno;
     }
-    
-    
+
 }
