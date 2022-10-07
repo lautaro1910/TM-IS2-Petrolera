@@ -1,11 +1,11 @@
 
 package BusinessObject;
-import TranserObject.Pozo;
 
+import TransferObject.Pozo;
 
 public class ManagerPozo {
-    
-    public Pozo ingresoDatos(String cantidadDeProductoExtraido, String equipo){
+
+    public Pozo ingresoDatos(String cantidadDeProductoExtraido, String equipo) {
         Pozo pozo = new Pozo();
 
         pozo.setCantidadDeProductoExtraido(cantidadDeProductoExtraido);
@@ -13,13 +13,13 @@ public class ManagerPozo {
 
         return pozo;
     }
-    
-    public Pozo pasoDatos(Pozo pozo){
+
+    public Pozo pasoDatos(Pozo pozo) {
         Pozo pozoAux = new Pozo();
 
         pozoAux.setCantidadDeProductoExtraido(pozo.getCantidadDeProductoExtraido());
         pozoAux.setEquipo(pozo.getEquipo());
 
         return pozoAux;
-    }    
+    }
 }

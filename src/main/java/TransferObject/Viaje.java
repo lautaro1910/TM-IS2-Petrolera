@@ -1,24 +1,23 @@
 
-package TranserObject;
-
+package TransferObject;
 
 public class Viaje {
     private String lugarOrigen;
     private String lugarDestino;
     private String fechaViaje;
 
-    public Viaje(){
-        this.lugarOrigen="null";
-        this.lugarDestino="null";
-        this.fechaViaje="null";
+    public Viaje() {
+        this.lugarOrigen = "null";
+        this.lugarDestino = "null";
+        this.fechaViaje = "null";
     }
-    
-    public Viaje(String lugarOrigen,String lugarDestino,String fechaViaje){
-        this.lugarOrigen=lugarOrigen;
-        this.lugarDestino=lugarDestino;
-        this.fechaViaje=fechaViaje;
+
+    public Viaje(String lugarOrigen, String lugarDestino, String fechaViaje) {
+        this.lugarOrigen = lugarOrigen;
+        this.lugarDestino = lugarDestino;
+        this.fechaViaje = fechaViaje;
     }
-    
+
     public String getLugarOrigen() {
         return lugarOrigen;
     }
@@ -42,6 +41,5 @@ public class Viaje {
     public void setFechaViaje(String fechaViaje) {
         this.fechaViaje = fechaViaje;
     }
-    
-    
+
 }

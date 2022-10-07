@@ -1,4 +1,4 @@
-package TranserObject;
+package TransferObject;
 
 public class Company {
     private String nombre;
@@ -7,20 +7,20 @@ public class Company {
     private String cantidadDeProducto;
     private String telefono;
 
-    public Company(){
-        this.nombre="null";
-        this.ubicacion="null";
-        this.tipoDeProducto="null";
-        this.cantidadDeProducto="null";
-        this.telefono="null";
+    public Company() {
+        this.nombre = "null";
+        this.ubicacion = "null";
+        this.tipoDeProducto = "null";
+        this.cantidadDeProducto = "null";
+        this.telefono = "null";
     }
-    
-     public Company(String nombre, String ubicacion, String tipoDeProducto, String cantidadDeProducto, String telefono){
-        this.nombre=nombre;
-        this.ubicacion=ubicacion;
-        this.tipoDeProducto=tipoDeProducto;
-        this.cantidadDeProducto=cantidadDeProducto;
-        this.telefono=telefono;
+
+    public Company(String nombre, String ubicacion, String tipoDeProducto, String cantidadDeProducto, String telefono) {
+        this.nombre = nombre;
+        this.ubicacion = ubicacion;
+        this.tipoDeProducto = tipoDeProducto;
+        this.cantidadDeProducto = cantidadDeProducto;
+        this.telefono = telefono;
     }
 
     public String getNombre() {
@@ -54,7 +54,7 @@ public class Company {
     public void setCantidadDeProducto(String cantidadDeProducto) {
         this.cantidadDeProducto = cantidadDeProducto;
     }
-    
+
     public String getTelefono() {
         return telefono;
     }
@@ -62,6 +62,5 @@ public class Company {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
-    
+
 }

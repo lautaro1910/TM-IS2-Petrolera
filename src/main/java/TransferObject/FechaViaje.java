@@ -1,24 +1,23 @@
 
-package TranserObject;
+package TransferObject;
 
 public class FechaViaje {
     private String diaInicio;
     private String diaFin;
     private String hora;
 
-    public FechaViaje(){
-        this.diaInicio="null";
-        this.diaFin="null";
-        this.hora="null";
+    public FechaViaje() {
+        this.diaInicio = "null";
+        this.diaFin = "null";
+        this.hora = "null";
     }
 
-    public FechaViaje(String diaIncio,String diaFin,String hora){
-        this.diaInicio=diaIncio;
-        this.diaFin=diaFin;
-        this.hora=hora;
+    public FechaViaje(String diaIncio, String diaFin, String hora) {
+        this.diaInicio = diaIncio;
+        this.diaFin = diaFin;
+        this.hora = hora;
     }
-    
-    
+
     public String getDiaIncio() {
         return diaInicio;
     }

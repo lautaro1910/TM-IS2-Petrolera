@@ -1,20 +1,20 @@
 
-package TranserObject;
+package TransferObject;
 
 public class Yacimiento {
     private String localizacionOrigen;
     private int estadoYacimiento;
     private String nombreYacimiento;
     private int idYacimiento;
-    
-    public Yacimiento(){
-        this.localizacionOrigen="null";
-        this.estadoYacimiento=0;
-        this.nombreYacimiento="null";
+
+    public Yacimiento() {
+        this.localizacionOrigen = "null";
+        this.estadoYacimiento = 0;
+        this.nombreYacimiento = "null";
         this.idYacimiento = 0;
     }
-    
-    public Yacimiento(String nombreYacimiento,String localizacionOrigen, int estadoYacimiento,int idYacimiento){
+
+    public Yacimiento(String nombreYacimiento, String localizacionOrigen, int estadoYacimiento, int idYacimiento) {
         this.localizacionOrigen = localizacionOrigen;
         this.estadoYacimiento = estadoYacimiento;
         this.nombreYacimiento = nombreYacimiento;
@@ -36,6 +36,7 @@ public class Yacimiento {
     public void setLocalizacionOrigen(String localizacionOrigen) {
         this.localizacionOrigen = localizacionOrigen;
     }
+
     public int getEstadoYacimiento() {
         return estadoYacimiento;
     }
@@ -51,6 +52,5 @@ public class Yacimiento {
     public void setNombreYacimiento(String nombreYacimiento) {
         this.nombreYacimiento = nombreYacimiento;
     }
-    
-    
+
 }

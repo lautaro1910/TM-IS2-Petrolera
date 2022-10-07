@@ -1,25 +1,25 @@
-package TranserObject;
+package TransferObject;
 
-public class ContratoMaquina {
+public class ContratoCamion {
     private String nombreDueño;
     private String fechaInicioContrato;
     private String fechaFinContrato;
     private float montoAlquiler;
 
-    public ContratoMaquina(){
-        this.nombreDueño="null";
-        this.fechaInicioContrato="null";
-        this.fechaFinContrato="null";
-        this.montoAlquiler=0;
+    public ContratoCamion() {
+        this.nombreDueño = "null";
+        this.fechaInicioContrato = "null";
+        this.fechaFinContrato = "null";
+        this.montoAlquiler = 0;
     }
-    
-    public ContratoMaquina(String nombreDueño, String fechaInicioContrato, String fechaFinContrato, int montoAlquiler){
-        this.nombreDueño=nombreDueño;
-        this.fechaInicioContrato=fechaInicioContrato;
-        this.fechaFinContrato=fechaFinContrato;
-        this.montoAlquiler=montoAlquiler;
+
+    public ContratoCamion(String nombreDueño, String fechaInicioContrato, String fechaFinContrato, int montoAlquiler) {
+        this.nombreDueño = nombreDueño;
+        this.fechaInicioContrato = fechaInicioContrato;
+        this.fechaFinContrato = fechaFinContrato;
+        this.montoAlquiler = montoAlquiler;
     }
-    
+
     public String getNombreDueño() {
         return nombreDueño;
     }
@@ -35,7 +35,7 @@ public class ContratoMaquina {
     public void setFechaInicioContrato(String fechaInicioContrato) {
         this.fechaInicioContrato = fechaInicioContrato;
     }
-    
+
     public String getFechaFinContrato() {
         return fechaFinContrato;
     }
@@ -51,6 +51,5 @@ public class ContratoMaquina {
     public void setMontoAlquiler(float montoAlquiler) {
         this.montoAlquiler = montoAlquiler;
     }
-    
-    
+
 }
