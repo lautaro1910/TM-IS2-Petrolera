@@ -1,4 +1,3 @@
-
 package DAO;
 
 import ConectionBD.Conection_BD;
@@ -10,6 +9,7 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 
 public class PozoDAO {
+
     private Conection_BD db;
     private Set<Pozo> listaPozos = new HashSet<Pozo>();
 
@@ -40,7 +40,7 @@ public class PozoDAO {
 
             if (resultSet != null) {
                 while (resultSet.next()) {
-                    pozo = new Pozo(resultSet.getString("cantidadDeProductoExtraido"), resultSet.getString("equipo"));
+                    pozo = new Pozo(resultSet.getInt("cantidadextraida"), resultSet.getString("equipo"), resultSet.getInt("estado"), resultSet.getString("nombreYacimiento"));
                     this.listaPozos.add(pozo);
                 }
                 resultSet.close();
@@ -61,7 +61,7 @@ public class PozoDAO {
 
             resultSet = this.db.queryR(consulta);
             if (resultSet != null && resultSet.next()) {
-                pozo = new Pozo(resultSet.getString("cantidadDeProductoExtraido"), resultSet.getString("equipo"));
+                pozo = new Pozo(resultSet.getInt("cantidadextraida"), resultSet.getString("equipo"), resultSet.getInt("estado"), resultSet.getString("nombreYacimiento"));
             }
             this.db.cerrarConexion();
         } catch (Exception ex) {
@@ -74,9 +74,10 @@ public class PozoDAO {
         try {
             this.db.conectar();
             String sentenciaSQL = new String();
-            sentenciaSQL = "INSERT INTO pozo(cantidadDeProductoExtraido, equipo)";
-            sentenciaSQL = sentenciaSQL + " VALUES (" + pozo.getCantidadDeProductoExtraido() + ",' " + pozo.getEquipo()
-                    + "')";
+            sentenciaSQL = "INSERT INTO pozo(cantidadextraida, equipo, estado, nombreYacimiento)";
+            sentenciaSQL = sentenciaSQL + " VALUES (" + pozo.getCantidadDeProductoExtraido() + ",'" + pozo.getEquipo()
+                    +"','" + pozo.getEstado() + "','" + pozo.getNomrbeSuYacimiento() + "')"; //si falla corregir comillas IMPORTANTE
+            
             this.db.statement(sentenciaSQL);
             sentenciaSQL = null;
             this.db.cerrarConexion();

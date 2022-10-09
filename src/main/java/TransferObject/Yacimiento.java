@@ -1,7 +1,7 @@
-
 package TransferObject;
 
 public class Yacimiento {
+
     private String localizacionOrigen;
     private int estadoYacimiento;
     private String nombreYacimiento;
