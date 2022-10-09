@@ -43,7 +43,7 @@ public class Camion {
         this.fechaFinServicio = fechaFinServicio;
     }
 
-    public String getMercancia() {
+    public String getMercancia() {  //La empresa le dice mercancia???
         return mercancia;
     }
 
