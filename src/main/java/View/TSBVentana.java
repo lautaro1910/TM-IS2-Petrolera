@@ -4,11 +4,14 @@
  */
 package View;
 
+import BusinessObject.ManagerPozo;
 import BusinessObject.ManagerYacimiento;
 import DAO.YacimientoDAO;
+import DAO.PozoDAO;
 import TransferObject.JefeDeArea;
 import TransferObject.Supervisor;
 import TransferObject.Yacimiento;
+import TransferObject.Pozo;
 
 import java.awt.Panel;
 import java.util.Iterator;
@@ -22,9 +25,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TSBVentana extends javax.swing.JFrame {
 
+    //Variables y objetos
     ManagerYacimiento my = new ManagerYacimiento();
     YacimientoDAO yd = new YacimientoDAO();
 
+    ManagerPozo mp = new ManagerPozo();
+    PozoDAO pd = new PozoDAO();
+
+    String nombYac = "";
+    String nombPozo = "";
+
+    // constructor
     public TSBVentana() {
         initComponents();
         panelInicio.setVisible(true);
@@ -38,6 +49,7 @@ public class TSBVentana extends javax.swing.JFrame {
         panelMenuYacimiento.setVisible(false);
     }
 
+    //Metodos
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,7 +57,7 @@ public class TSBVentana extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         panelInicio = new javax.swing.JPanel();
@@ -174,21 +186,21 @@ public class TSBVentana extends javax.swing.JFrame {
         botonSalirLP = new javax.swing.JButton();
         jLabel62 = new javax.swing.JLabel();
         panelAgregarPozo = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
+        panelAzulingresoPozo = new javax.swing.JPanel();
         jLabel81 = new javax.swing.JLabel();
         jLabel68 = new javax.swing.JLabel();
         jLabel69 = new javax.swing.JLabel();
         jLabel67 = new javax.swing.JLabel();
-        jPanel16 = new javax.swing.JPanel();
+        panelContenidoIngresoPozo = new javax.swing.JPanel();
         botonAtrasIP = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        CampoNombreYac3 = new javax.swing.JTextField();
+        equipoPozo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        comboEstadoYac1 = new javax.swing.JComboBox<>();
+        estadoPozo = new javax.swing.JComboBox<>();
         botonCancelarIP = new javax.swing.JButton();
-        jButton33 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ingresarPozoButton = new javax.swing.JButton();
+        yacimientoDePozo = new javax.swing.JComboBox<>();
         jLabel66 = new javax.swing.JLabel();
         panelMenuPozo = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
@@ -256,7 +268,6 @@ public class TSBVentana extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CampoPassKeyPressed(evt);
             }
-
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 CampoPassKeyTyped(evt);
             }
@@ -303,7 +314,6 @@ public class TSBVentana extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CampoUsuarioKeyPressed(evt);
             }
-
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 CampoUsuarioKeyTyped(evt);
             }
@@ -347,31 +357,29 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonMenuMaquinasLayout = new javax.swing.GroupLayout(BotonMenuMaquinas);
         BotonMenuMaquinas.setLayout(BotonMenuMaquinasLayout);
         BotonMenuMaquinasLayout.setHorizontalGroup(
-                BotonMenuMaquinasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuMaquinasLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonMenuMaquinasLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                BotonMenuMaquinasLayout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel16)
-                                        .addGap(57, 57, 57)));
+            BotonMenuMaquinasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuMaquinasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonMenuMaquinasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonMenuMaquinasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addGap(57, 57, 57))
+        );
         BotonMenuMaquinasLayout.setVerticalGroup(
-                BotonMenuMaquinasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuMaquinasLayout.createSequentialGroup()
-                                .addContainerGap(37, Short.MAX_VALUE)
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel22)
-                                .addGap(18, 18, 18)));
+            BotonMenuMaquinasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuMaquinasLayout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel22)
+                .addGap(18, 18, 18))
+        );
 
         jPanel3.add(BotonMenuMaquinas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 160, 140));
 
@@ -381,11 +389,9 @@ public class TSBVentana extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonMenuEmpleadosMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonMenuEmpleadosMouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonMenuEmpleadosMousePressed(evt);
             }
@@ -404,31 +410,29 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonMenuEmpleadosLayout = new javax.swing.GroupLayout(BotonMenuEmpleados);
         BotonMenuEmpleados.setLayout(BotonMenuEmpleadosLayout);
         BotonMenuEmpleadosLayout.setHorizontalGroup(
-                BotonMenuEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuEmpleadosLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonMenuEmpleadosLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                BotonMenuEmpleadosLayout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel14)
-                                        .addGap(57, 57, 57)));
+            BotonMenuEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuEmpleadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonMenuEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonMenuEmpleadosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addGap(57, 57, 57))
+        );
         BotonMenuEmpleadosLayout.setVerticalGroup(
-                BotonMenuEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuEmpleadosLayout.createSequentialGroup()
-                                .addContainerGap(16, Short.MAX_VALUE)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel23)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel24)
-                                .addGap(18, 18, 18)));
+            BotonMenuEmpleadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuEmpleadosLayout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18))
+        );
 
         jPanel3.add(BotonMenuEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 160, 140));
 
@@ -438,11 +442,9 @@ public class TSBVentana extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonMenuClientesMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonMenuClientesMouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonMenuClientesMousePressed(evt);
             }
@@ -461,45 +463,44 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonMenuClientesLayout = new javax.swing.GroupLayout(BotonMenuClientes);
         BotonMenuClientes.setLayout(BotonMenuClientesLayout);
         BotonMenuClientesLayout.setHorizontalGroup(
-                BotonMenuClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuClientesLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonMenuClientesLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, 148,
-                                                Short.MAX_VALUE)
-                                        .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                BotonMenuClientesLayout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel15)
-                                        .addGap(52, 52, 52)));
+            BotonMenuClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonMenuClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonMenuClientesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel15)
+                .addGap(52, 52, 52))
+        );
         BotonMenuClientesLayout.setVerticalGroup(
-                BotonMenuClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuClientesLayout.createSequentialGroup()
-                                .addContainerGap(19, Short.MAX_VALUE)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel26)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel27)
-                                .addGap(18, 18, 18)));
+            BotonMenuClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuClientesLayout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel27)
+                .addGap(18, 18, 18))
+        );
 
         jPanel3.add(BotonMenuClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 160, 140));
 
         BotonMenuYacimiento.setBackground(new java.awt.Color(150, 187, 39));
         BotonMenuYacimiento.setToolTipText("Listado de información asociada a los comprobantes");
         BotonMenuYacimiento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonMenuYacimientoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonMenuYacimientoMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonMenuYacimientoMouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonMenuYacimientoMousePressed(evt);
             }
@@ -518,30 +519,29 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonMenuYacimientoLayout = new javax.swing.GroupLayout(BotonMenuYacimiento);
         BotonMenuYacimiento.setLayout(BotonMenuYacimientoLayout);
         BotonMenuYacimientoLayout.setHorizontalGroup(
-                BotonMenuYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuYacimientoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonMenuYacimientoLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(BotonMenuYacimientoLayout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(jLabel13)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            BotonMenuYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuYacimientoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonMenuYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(BotonMenuYacimientoLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jLabel13)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         BotonMenuYacimientoLayout.setVerticalGroup(
-                BotonMenuYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuYacimientoLayout.createSequentialGroup()
-                                .addContainerGap(16, Short.MAX_VALUE)
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel29)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel30)
-                                .addGap(18, 18, 18)));
+            BotonMenuYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuYacimientoLayout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel30)
+                .addGap(18, 18, 18))
+        );
 
         jPanel3.add(BotonMenuYacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 160, 140));
 
@@ -561,30 +561,29 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonMenuContratosLayout = new javax.swing.GroupLayout(BotonMenuContratos);
         BotonMenuContratos.setLayout(BotonMenuContratosLayout);
         BotonMenuContratosLayout.setHorizontalGroup(
-                BotonMenuContratosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuContratosLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonMenuContratosLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, 148,
-                                                Short.MAX_VALUE)
-                                        .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(BotonMenuContratosLayout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel17)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            BotonMenuContratosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuContratosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonMenuContratosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(BotonMenuContratosLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jLabel17)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         BotonMenuContratosLayout.setVerticalGroup(
-                BotonMenuContratosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuContratosLayout.createSequentialGroup()
-                                .addContainerGap(18, Short.MAX_VALUE)
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel32)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel33)
-                                .addGap(18, 18, 18)));
+            BotonMenuContratosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuContratosLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel33)
+                .addGap(18, 18, 18))
+        );
 
         jPanel3.add(BotonMenuContratos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, -1, -1));
 
@@ -604,31 +603,29 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonMenuCamionesLayout = new javax.swing.GroupLayout(BotonMenuCamiones);
         BotonMenuCamiones.setLayout(BotonMenuCamionesLayout);
         BotonMenuCamionesLayout.setHorizontalGroup(
-                BotonMenuCamionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuCamionesLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonMenuCamionesLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 148,
-                                                Short.MAX_VALUE)
-                                        .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                BotonMenuCamionesLayout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel18)
-                                        .addGap(55, 55, 55)));
+            BotonMenuCamionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuCamionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonMenuCamionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonMenuCamionesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(55, 55, 55))
+        );
         BotonMenuCamionesLayout.setVerticalGroup(
-                BotonMenuCamionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuCamionesLayout.createSequentialGroup()
-                                .addContainerGap(18, Short.MAX_VALUE)
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel35)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel36)
-                                .addGap(18, 18, 18)));
+            BotonMenuCamionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuCamionesLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel36)
+                .addGap(18, 18, 18))
+        );
 
         jPanel3.add(BotonMenuCamiones, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 350, -1, -1));
 
@@ -686,6 +683,9 @@ public class TSBVentana extends javax.swing.JFrame {
         botonAtrasIngYac.setBackground(new java.awt.Color(204, 204, 204));
         botonAtrasIngYac.setText("Atras");
         botonAtrasIngYac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonAtrasIngYacMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 botonAtrasIngYacMousePressed(evt);
             }
@@ -703,7 +703,6 @@ public class TSBVentana extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CampoNombreYacKeyPressed(evt);
             }
-
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 CampoNombreYacKeyTyped(evt);
             }
@@ -726,7 +725,6 @@ public class TSBVentana extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CampoLocalizaciónKeyPressed(evt);
             }
-
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 CampoLocalizaciónKeyTyped(evt);
             }
@@ -807,21 +805,22 @@ public class TSBVentana extends javax.swing.JFrame {
         });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null },
-                        { null, null, null }
-                },
-                new String[] {
-                        "Localización", "Nombre", "Estado"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Localización", "Nombre", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -856,11 +855,9 @@ public class TSBVentana extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonMenuYacimiento1MouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonMenuYacimiento1MouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonMenuYacimiento1MousePressed(evt);
             }
@@ -875,23 +872,25 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonMenuYacimiento1Layout = new javax.swing.GroupLayout(BotonMenuYacimiento1);
         BotonMenuYacimiento1.setLayout(BotonMenuYacimiento1Layout);
         BotonMenuYacimiento1Layout.setHorizontalGroup(
-                BotonMenuYacimiento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuYacimiento1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel86, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                                .addContainerGap())
-                        .addGroup(BotonMenuYacimiento1Layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(jLabel88)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            BotonMenuYacimiento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuYacimiento1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel86, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(BotonMenuYacimiento1Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel88)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         BotonMenuYacimiento1Layout.setVerticalGroup(
-                BotonMenuYacimiento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuYacimiento1Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel88)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel86)
-                                .addGap(19, 19, 19)));
+            BotonMenuYacimiento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuYacimiento1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel88)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel86)
+                .addGap(19, 19, 19))
+        );
 
         jPanel10.add(BotonMenuYacimiento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 100, 160, 90));
 
@@ -901,11 +900,9 @@ public class TSBVentana extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonMenuEmpleados1MouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonMenuEmpleados1MouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonMenuEmpleados1MousePressed(evt);
             }
@@ -920,39 +917,40 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonMenuEmpleados1Layout = new javax.swing.GroupLayout(BotonMenuEmpleados1);
         BotonMenuEmpleados1.setLayout(BotonMenuEmpleados1Layout);
         BotonMenuEmpleados1Layout.setHorizontalGroup(
-                BotonMenuEmpleados1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuEmpleados1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel89, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                BotonMenuEmpleados1Layout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel91)
-                                        .addGap(57, 57, 57)));
+            BotonMenuEmpleados1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuEmpleados1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel89, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonMenuEmpleados1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel91)
+                .addGap(57, 57, 57))
+        );
         BotonMenuEmpleados1Layout.setVerticalGroup(
-                BotonMenuEmpleados1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonMenuEmpleados1Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel91)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel89)
-                                .addGap(43, 43, 43)));
+            BotonMenuEmpleados1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuEmpleados1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel91)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel89)
+                .addGap(43, 43, 43))
+        );
 
         jPanel10.add(BotonMenuEmpleados1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 220, 160, 100));
 
         BotonAMenuP.setBackground(new java.awt.Color(150, 187, 39));
         BotonAMenuP.setToolTipText("Listado de información asociada a los comprobantes");
         BotonAMenuP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonAMenuPMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonAMenuPMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonAMenuPMouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonAMenuPMousePressed(evt);
             }
@@ -963,28 +961,34 @@ public class TSBVentana extends javax.swing.JFrame {
         jLabel92.setText("Pozos Pertenecientes");
 
         jLabel94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cliente.png"))); // NOI18N
+        jLabel94.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel94MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout BotonAMenuPLayout = new javax.swing.GroupLayout(BotonAMenuP);
         BotonAMenuP.setLayout(BotonAMenuPLayout);
         BotonAMenuPLayout.setHorizontalGroup(
-                BotonAMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonAMenuPLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel92, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
-                        .addGroup(BotonAMenuPLayout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(jLabel94)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            BotonAMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonAMenuPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel92, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(BotonAMenuPLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jLabel94)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         BotonAMenuPLayout.setVerticalGroup(
-                BotonAMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonAMenuPLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel94)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel92)
-                                .addGap(43, 43, 43)));
+            BotonAMenuPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonAMenuPLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel94)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel92)
+                .addGap(43, 43, 43))
+        );
 
         jPanel10.add(BotonAMenuP, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 350, 160, 100));
 
@@ -1032,11 +1036,9 @@ public class TSBVentana extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonListadoYacimientoMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonListadoYacimientoMouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonListadoYacimientoMousePressed(evt);
             }
@@ -1055,31 +1057,29 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonListadoYacimientoLayout = new javax.swing.GroupLayout(BotonListadoYacimiento);
         BotonListadoYacimiento.setLayout(BotonListadoYacimientoLayout);
         BotonListadoYacimientoLayout.setHorizontalGroup(
-                BotonListadoYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonListadoYacimientoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonListadoYacimientoLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, 148,
-                                                Short.MAX_VALUE)
-                                        .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                BotonListadoYacimientoLayout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel59)
-                                        .addGap(52, 52, 52)));
+            BotonListadoYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonListadoYacimientoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonListadoYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonListadoYacimientoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel59)
+                .addGap(52, 52, 52))
+        );
         BotonListadoYacimientoLayout.setVerticalGroup(
-                BotonListadoYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonListadoYacimientoLayout.createSequentialGroup()
-                                .addContainerGap(23, Short.MAX_VALUE)
-                                .addComponent(jLabel59)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel38)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel39)
-                                .addGap(18, 18, 18)));
+            BotonListadoYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonListadoYacimientoLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jLabel59)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel39)
+                .addGap(18, 18, 18))
+        );
 
         jPanel8.add(BotonListadoYacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 160, 140));
 
@@ -1089,11 +1089,9 @@ public class TSBVentana extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonAgregarYacimientoMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonAgregarYacimientoMouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonAgregarYacimientoMousePressed(evt);
             }
@@ -1107,51 +1105,49 @@ public class TSBVentana extends javax.swing.JFrame {
         jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel42.setText("yacimiento");
 
-        jLabel60.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/Agregaryacimiento.png"))); // NOI18N
+        jLabel60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/Agregaryacimiento.png"))); // NOI18N
 
         javax.swing.GroupLayout BotonAgregarYacimientoLayout = new javax.swing.GroupLayout(BotonAgregarYacimiento);
         BotonAgregarYacimiento.setLayout(BotonAgregarYacimientoLayout);
         BotonAgregarYacimientoLayout.setHorizontalGroup(
-                BotonAgregarYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonAgregarYacimientoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonAgregarYacimientoLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, 148,
-                                                Short.MAX_VALUE)
-                                        .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(BotonAgregarYacimientoLayout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(jLabel60)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            BotonAgregarYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonAgregarYacimientoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonAgregarYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(BotonAgregarYacimientoLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jLabel60)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         BotonAgregarYacimientoLayout.setVerticalGroup(
-                BotonAgregarYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonAgregarYacimientoLayout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel60)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel41)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel42)
-                                .addGap(18, 18, 18)));
+            BotonAgregarYacimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonAgregarYacimientoLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel42)
+                .addGap(18, 18, 18))
+        );
 
         jPanel8.add(BotonAgregarYacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, 140));
 
         BotonAgregarPozo.setBackground(new java.awt.Color(150, 187, 39));
         BotonAgregarPozo.setToolTipText("Listado de información asociada a los comprobantes");
         BotonAgregarPozo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonAgregarPozoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonAgregarPozoMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonAgregarPozoMouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonAgregarPozoMousePressed(evt);
             }
@@ -1170,30 +1166,29 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonAgregarPozoLayout = new javax.swing.GroupLayout(BotonAgregarPozo);
         BotonAgregarPozo.setLayout(BotonAgregarPozoLayout);
         BotonAgregarPozoLayout.setHorizontalGroup(
-                BotonAgregarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonAgregarPozoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonAgregarPozoLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, 148,
-                                                Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(BotonAgregarPozoLayout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(jLabel61)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            BotonAgregarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonAgregarPozoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonAgregarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(BotonAgregarPozoLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jLabel61)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         BotonAgregarPozoLayout.setVerticalGroup(
-                BotonAgregarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonAgregarPozoLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel61)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel44)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel45)
-                                .addGap(24, 24, 24)));
+            BotonAgregarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonAgregarPozoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel61)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel45)
+                .addGap(24, 24, 24))
+        );
 
         jPanel8.add(BotonAgregarPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 230, -1, 140));
 
@@ -1274,15 +1269,16 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel12.add(jButton24, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 140, 40));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null }
-                },
-                new String[] {
-                        "Title 1", "Title 2", "Title 3", "Title 4"
-                }));
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
         jScrollPane2.setViewportView(jTable2);
 
         jPanel12.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 630, 470));
@@ -1314,27 +1310,27 @@ public class TSBVentana extends javax.swing.JFrame {
         panelAgregarPozo.setMinimumSize(new java.awt.Dimension(1000, 700));
         panelAgregarPozo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel15.setBackground(new java.awt.Color(29, 59, 115));
-        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelAzulingresoPozo.setBackground(new java.awt.Color(29, 59, 115));
+        panelAzulingresoPozo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel81.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel81.setForeground(new java.awt.Color(255, 255, 255));
         jLabel81.setText("INGRESO DE POZO");
-        jPanel15.add(jLabel81, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+        panelAzulingresoPozo.add(jLabel81, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
 
         jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/minimizar.png"))); // NOI18N
-        jPanel15.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
+        panelAzulingresoPozo.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
 
         jLabel69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cerrar.png"))); // NOI18N
-        jPanel15.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
+        panelAzulingresoPozo.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
 
         jLabel67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/maximizar.png"))); // NOI18N
-        jPanel15.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
+        panelAzulingresoPozo.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
-        panelAgregarPozo.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
+        panelAgregarPozo.add(panelAzulingresoPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
 
-        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelContenidoIngresoPozo.setBackground(new java.awt.Color(255, 255, 255));
+        panelContenidoIngresoPozo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         botonAtrasIP.setBackground(new java.awt.Color(204, 204, 204));
         botonAtrasIP.setText("Atras");
@@ -1343,45 +1339,36 @@ public class TSBVentana extends javax.swing.JFrame {
                 botonAtrasIPActionPerformed(evt);
             }
         });
-        jPanel16.add(botonAtrasIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, 110, 30));
+        panelContenidoIngresoPozo.add(botonAtrasIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, 110, 30));
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Nombre de yacimiento:");
+        jLabel10.setText("Nombre Yacimiento:");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jPanel16.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 170, 50));
+        panelContenidoIngresoPozo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 140, 50));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Estado:");
         jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jPanel16.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 100, 50));
+        panelContenidoIngresoPozo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 100, 50));
 
-        CampoNombreYac3.setToolTipText("");
-        CampoNombreYac3.addActionListener(new java.awt.event.ActionListener() {
+        equipoPozo.setToolTipText("");
+        equipoPozo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CampoNombreYac3ActionPerformed(evt);
+                equipoPozoActionPerformed(evt);
             }
         });
-        CampoNombreYac3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                CampoNombreYac3KeyPressed(evt);
-            }
-
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                CampoNombreYac3KeyTyped(evt);
-            }
-        });
-        jPanel16.add(CampoNombreYac3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 270, 30));
+        panelContenidoIngresoPozo.add(equipoPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 270, 30));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Equipo:");
+        jLabel12.setText("Identificador Pozo:");
         jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jPanel16.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 130, 50));
+        panelContenidoIngresoPozo.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 130, 50));
 
-        comboEstadoYac1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        jPanel16.add(comboEstadoYac1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 270, 30));
+        estadoPozo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        panelContenidoIngresoPozo.add(estadoPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 270, 30));
 
         botonCancelarIP.setBackground(new java.awt.Color(204, 204, 204));
         botonCancelarIP.setText("Cancelar");
@@ -1390,25 +1377,28 @@ public class TSBVentana extends javax.swing.JFrame {
                 botonCancelarIPMousePressed(evt);
             }
         });
-        jPanel16.add(botonCancelarIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
+        panelContenidoIngresoPozo.add(botonCancelarIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
 
-        jButton33.setBackground(new java.awt.Color(150, 187, 39));
-        jButton33.setText("Ingresar Pozo");
-        jButton33.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton33ActionPerformed(evt);
+        ingresarPozoButton.setBackground(new java.awt.Color(150, 187, 39));
+        ingresarPozoButton.setText("Ingresar Pozo");
+        ingresarPozoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ingresarPozoButtonMouseClicked(evt);
             }
         });
-        jPanel16.add(jButton33, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 170, 30));
+        panelContenidoIngresoPozo.add(ingresarPozoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 170, 30));
 
-        jComboBox1.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel16.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 270, 30));
+        yacimientoDePozo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yacimientoDePozoActionPerformed(evt);
+            }
+        });
+        panelContenidoIngresoPozo.add(yacimientoDePozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 270, 30));
 
         jLabel66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
-        jPanel16.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        panelContenidoIngresoPozo.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        panelAgregarPozo.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
+        panelAgregarPozo.add(panelContenidoIngresoPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
 
         panelMenuPozo.setMaximumSize(new java.awt.Dimension(1000, 700));
         panelMenuPozo.setMinimumSize(new java.awt.Dimension(1000, 700));
@@ -1432,11 +1422,9 @@ public class TSBVentana extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonListadoFacturas9MouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonListadoFacturas9MouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonListadoFacturas9MousePressed(evt);
             }
@@ -1455,30 +1443,29 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonListadoFacturas9Layout = new javax.swing.GroupLayout(BotonListadoFacturas9);
         BotonListadoFacturas9.setLayout(BotonListadoFacturas9Layout);
         BotonListadoFacturas9Layout.setHorizontalGroup(
-                BotonListadoFacturas9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonListadoFacturas9Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonListadoFacturas9Layout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, 148,
-                                                Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(BotonListadoFacturas9Layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(jLabel74)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            BotonListadoFacturas9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonListadoFacturas9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonListadoFacturas9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(BotonListadoFacturas9Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel74)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         BotonListadoFacturas9Layout.setVerticalGroup(
-                BotonListadoFacturas9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonListadoFacturas9Layout.createSequentialGroup()
-                                .addContainerGap(17, Short.MAX_VALUE)
-                                .addComponent(jLabel74)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel47)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel48)
-                                .addGap(18, 18, 18)));
+            BotonListadoFacturas9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonListadoFacturas9Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(jLabel74)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel48)
+                .addGap(18, 18, 18))
+        );
 
         jPanel13.add(BotonListadoFacturas9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 160, 140));
 
@@ -1488,11 +1475,9 @@ public class TSBVentana extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonListadoFacturas10MouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonListadoFacturas10MouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonListadoFacturas10MousePressed(evt);
             }
@@ -1511,31 +1496,29 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonListadoFacturas10Layout = new javax.swing.GroupLayout(BotonListadoFacturas10);
         BotonListadoFacturas10.setLayout(BotonListadoFacturas10Layout);
         BotonListadoFacturas10Layout.setHorizontalGroup(
-                BotonListadoFacturas10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonListadoFacturas10Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonListadoFacturas10Layout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel51, javax.swing.GroupLayout.DEFAULT_SIZE, 148,
-                                                Short.MAX_VALUE)
-                                        .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                BotonListadoFacturas10Layout.createSequentialGroup()
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel75)
-                                        .addGap(33, 33, 33)));
+            BotonListadoFacturas10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonListadoFacturas10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonListadoFacturas10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel51, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonListadoFacturas10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel75)
+                .addGap(33, 33, 33))
+        );
         BotonListadoFacturas10Layout.setVerticalGroup(
-                BotonListadoFacturas10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonListadoFacturas10Layout.createSequentialGroup()
-                                .addContainerGap(18, Short.MAX_VALUE)
-                                .addComponent(jLabel75)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel50)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel51)
-                                .addGap(18, 18, 18)));
+            BotonListadoFacturas10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonListadoFacturas10Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel51)
+                .addGap(18, 18, 18))
+        );
 
         jPanel13.add(BotonListadoFacturas10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, -1, -1));
 
@@ -1545,11 +1528,9 @@ public class TSBVentana extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonListadoFacturas11MouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BotonListadoFacturas11MouseExited(evt);
             }
-
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonListadoFacturas11MousePressed(evt);
             }
@@ -1568,30 +1549,29 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout BotonListadoFacturas11Layout = new javax.swing.GroupLayout(BotonListadoFacturas11);
         BotonListadoFacturas11.setLayout(BotonListadoFacturas11Layout);
         BotonListadoFacturas11Layout.setHorizontalGroup(
-                BotonListadoFacturas11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonListadoFacturas11Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(BotonListadoFacturas11Layout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, 148,
-                                                Short.MAX_VALUE))
-                                .addContainerGap())
-                        .addGroup(BotonListadoFacturas11Layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(jLabel76)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            BotonListadoFacturas11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonListadoFacturas11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonListadoFacturas11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(BotonListadoFacturas11Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jLabel76)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         BotonListadoFacturas11Layout.setVerticalGroup(
-                BotonListadoFacturas11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(BotonListadoFacturas11Layout.createSequentialGroup()
-                                .addContainerGap(16, Short.MAX_VALUE)
-                                .addComponent(jLabel76)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel53)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel54)
-                                .addGap(18, 18, 18)));
+            BotonListadoFacturas11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonListadoFacturas11Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jLabel76)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel54)
+                .addGap(18, 18, 18))
+        );
 
         jPanel13.add(BotonListadoFacturas11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, -1, 140));
 
@@ -1626,54 +1606,83 @@ public class TSBVentana extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panelMenuPozo, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(panelMenuYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(panelListadoPozo, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(panelAgregarPozo, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(panelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(panelAgregarYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(panelListadoYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(panelInicio, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelMenuPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelMenuYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelListadoPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelAgregarPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelAgregarYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelListadoYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(panelMenuPozo, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(panelMenuYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(panelListadoPozo, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(panelAgregarPozo, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(panelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(panelAgregarYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(panelListadoYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(panelInicio, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelMenuPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMenuYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelListadoPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelAgregarPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelAgregarYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelListadoYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    //metodo agregar pozo
+    private void ingresarPozoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarPozoButtonMouseClicked
+        // TODO add your handling code here:
+        Pozo pozito = new Pozo();
+        int estado = 0; //1=activo, 0=inactivo
+
+        if (equipoPozo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Debe ingresar todos los datos primero!!!");
+        }
+        if (estadoPozo.getSelectedItem().equals("Activo")) {
+            estado = 1;
+        } else {
+            estado = 0;
+        }
+
+        pozito = mp.ingresoDatos(0, equipoPozo.getText(), estado, (String) yacimientoDePozo.getSelectedItem());
+
+        pd.create(pozito);
+        panelAgregarPozo.setVisible(false);
+        panelMenuYacimiento.setVisible(true);
+    }//GEN-LAST:event_ingresarPozoButtonMouseClicked
+
+    private void yacimientoDePozoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yacimientoDePozoActionPerformed
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_yacimientoDePozoActionPerformed
+
+    private void jLabel94MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel94MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel94MouseClicked
+
+    private void BotonAMenuPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAMenuPMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonAMenuPMouseClicked
+
+    private void botonAtrasIngYacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAtrasIngYacMouseClicked
+        // TODO add your handling code here:
+        panelAgregarYacimiento.setVisible(false);
+        panelMenuYacimiento.setVisible(true);
+    }//GEN-LAST:event_botonAtrasIngYacMouseClicked
+
+    private void BotonMenuYacimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuYacimientoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonMenuYacimientoMouseClicked
+
+    private void BotonAgregarPozoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarPozoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonAgregarPozoMouseClicked
 
     private void CampoPassKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoPassKeyPressed
         /*
@@ -1850,6 +1859,7 @@ public class TSBVentana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }// GEN-LAST:event_BotonListadoYacimientoMouseExited
 
+    //cargar yacimientos en la fila
     public void cargarDatos() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTable1.getModel();
         modelo = (DefaultTableModel) this.jTable1.getModel();
@@ -1908,10 +1918,23 @@ public class TSBVentana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }// GEN-LAST:event_BotonAgregarPozoMouseExited
 
+    //metodo que se usa en el boton de abajo
+    private void listaYacimientosCargada() {
+        Set listaYacimientoBD = yd.getDAO();
+        Iterator<Yacimiento> it = listaYacimientoBD.iterator();
+        yacimientoDePozo.removeAllItems();
+        while (it.hasNext()) {
+            Yacimiento aiter = it.next();
+            yacimientoDePozo.addItem(aiter.getNombreYacimiento());
+
+        }
+    }
+
     private void BotonAgregarPozoMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonAgregarPozoMousePressed
         // TODO add your handling code here:
         panelMenuYacimiento.setVisible(false);
         panelAgregarPozo.setVisible(true);
+        listaYacimientosCargada();
     }// GEN-LAST:event_BotonAgregarPozoMousePressed
 
     private void BotonListadoFacturas9MouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoFacturas9MouseEntered
@@ -2051,17 +2074,14 @@ public class TSBVentana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }// GEN-LAST:event_BotonAMenuPMouseExited
 
-    String nombYac = "";
-
+    //Codigo YACIMIENTO
     private void BotonAMenuPMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonAMenuPMousePressed
         // TODO add your handling code here:
-
         if (nombYac == "") {
             JOptionPane.showMessageDialog(null, "Usted debe seleccionar un dato");
         } else {
             panelMenuPozo.setVisible(true);
             panelListadoYacimiento.setVisible(false);
-            System.out.println(nombYac);
         }
     }// GEN-LAST:event_BotonAMenuPMousePressed
 
@@ -2069,8 +2089,6 @@ public class TSBVentana extends javax.swing.JFrame {
         // Capturo el yacimiento seleccionado en la tabla
         int seleccion = jTable1.rowAtPoint(evt.getPoint());
         nombYac = (String) jTable1.getValueAt(seleccion, 1);
-
-        System.out.println(nombYac);
     }// GEN-LAST:event_jTable1MouseClicked
 
     /**
@@ -2139,7 +2157,6 @@ public class TSBVentana extends javax.swing.JFrame {
     private javax.swing.JButton BotonSalirMY;
     private javax.swing.JTextField CampoLocalización;
     private javax.swing.JTextField CampoNombreYac;
-    private javax.swing.JTextField CampoNombreYac3;
     private javax.swing.JTextField CampoPass;
     private javax.swing.JTextField CampoUsuario;
     private javax.swing.JButton botonAtrasIP;
@@ -2152,15 +2169,15 @@ public class TSBVentana extends javax.swing.JFrame {
     private javax.swing.JButton botonSalirLY;
     private javax.swing.JButton botonSalirMenuP;
     private javax.swing.JComboBox<String> comboEstadoYac;
-    private javax.swing.JComboBox<String> comboEstadoYac1;
+    private javax.swing.JTextField equipoPozo;
+    private javax.swing.JComboBox<String> estadoPozo;
+    private javax.swing.JButton ingresarPozoButton;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;
-    private javax.swing.JButton jButton33;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2258,8 +2275,6 @@ public class TSBVentana extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2275,11 +2290,14 @@ public class TSBVentana extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JPanel panelAgregarPozo;
     private javax.swing.JPanel panelAgregarYacimiento;
+    private javax.swing.JPanel panelAzulingresoPozo;
+    private javax.swing.JPanel panelContenidoIngresoPozo;
     private javax.swing.JPanel panelInicio;
     private javax.swing.JPanel panelListadoPozo;
     private javax.swing.JPanel panelListadoYacimiento;
     private javax.swing.JPanel panelMenuPozo;
     private javax.swing.JPanel panelMenuPrincipal;
     private javax.swing.JPanel panelMenuYacimiento;
+    private javax.swing.JComboBox<String> yacimientoDePozo;
     // End of variables declaration//GEN-END:variables
 }
