@@ -4,13 +4,10 @@
  */
 package DAO;
 
-
-
-
 /**
  *
  * @author Usuario
  */
 public class CamionAlquiladoDAO {
-    
+
 }

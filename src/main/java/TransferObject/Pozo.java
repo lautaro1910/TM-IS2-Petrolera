@@ -5,37 +5,37 @@ public class Pozo {
     private int cantidadExtraida;  //aca habria que especificar el tipo de producto, no?
     // private String tipoProducto; //codificado. 1=agua sucia, 0=petroleummm O suponemos todo petroleo?
     private String equipo;
-    private int estado;
+    private int estadoPozo;
     private String nombreSuYacimiento;
 
     
     public Pozo(){
         this.cantidadExtraida = 0;
         this.equipo = "";
-        this.estado = 0;
+        this.estadoPozo = 0;
         this.nombreSuYacimiento = "";
     }
     
-    public Pozo(int cantidadDeProductoExtraido, String equipo, int estado, String nomrbeSuYacimiento) {
+    public Pozo(int cantidadDeProductoExtraido, String equipo, int estadoPozo, String nombreSuYacimiento) {
         this.cantidadExtraida = cantidadDeProductoExtraido;
         this.equipo = equipo;
-        this.estado = estado;
-        this.nombreSuYacimiento = nomrbeSuYacimiento;
+        this.estadoPozo = estadoPozo;
+        this.nombreSuYacimiento = nombreSuYacimiento;
     }
 
     public int getEstado() {
-        return estado;
+        return estadoPozo;
     }
 
-    public void setEstado(int estado) {
-        this.estado = estado;
+    public void setEstado(int estadoPozo) {
+        this.estadoPozo = estadoPozo;
     }
 
-    public String getNomrbeSuYacimiento() {
+    public String getNombreSuYacimiento() {
         return nombreSuYacimiento;
     }
 
-    public void setNomrbeSuYacimiento(String nomrbeSuYacimiento) {
+    public void setNombreSuYacimiento(String nomrbeSuYacimiento) {
         this.nombreSuYacimiento = nomrbeSuYacimiento;
     }
 

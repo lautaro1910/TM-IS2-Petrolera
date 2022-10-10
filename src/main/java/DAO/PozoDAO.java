@@ -40,7 +40,7 @@ public class PozoDAO {
 
             if (resultSet != null) {
                 while (resultSet.next()) {
-                    pozo = new Pozo(resultSet.getInt("cantidadextraida"), resultSet.getString("equipo"), resultSet.getInt("estado"), resultSet.getString("nombreYacimiento"));
+                    pozo = new Pozo(resultSet.getInt("cantidadextraida"), resultSet.getString("equipo"), resultSet.getInt("estadoPozo"), resultSet.getString("nombreYacimiento"));
                     this.listaPozos.add(pozo);
                 }
                 resultSet.close();
@@ -52,31 +52,37 @@ public class PozoDAO {
         return this.listaPozos;
     }
 
-    public Pozo getDAO(String equipo) {
-        Pozo pozo = null;
+    public Set getPozosDeYac(String nombreSuYacimiento) {
         try {
+            listaPozos.clear();
             ResultSet resultSet = null;
-            String consulta = "SELECT * FROM pozo WHERE equipo=" + equipo;
+            String consulta = "SELECT * FROM pozo WHERE nombreyacimiento=" + "'" + nombreSuYacimiento + "'" + ";";
             this.db.conectar();
-
             resultSet = this.db.queryR(consulta);
-            if (resultSet != null && resultSet.next()) {
-                pozo = new Pozo(resultSet.getInt("cantidadextraida"), resultSet.getString("equipo"), resultSet.getInt("estado"), resultSet.getString("nombreYacimiento"));
+            
+            Pozo pozo;
+            
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    pozo = new Pozo(resultSet.getInt("cantidadextraida"), resultSet.getString("equipo"), resultSet.getInt("estadopozo"), resultSet.getString("nombreyacimiento"));
+                    this.listaPozos.add(pozo);
+                }
+                resultSet.close();
             }
             this.db.cerrarConexion();
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());// mostrar el Error
         }
-        return pozo;
+        return listaPozos;
     }
 
     public void create(Pozo pozo) {
         try {
             this.db.conectar();
             String sentenciaSQL = new String();
-            sentenciaSQL = "INSERT INTO pozo(cantidadextraida, equipo, estado, nombreYacimiento)";
+            sentenciaSQL = "INSERT INTO pozo(cantidadextraida, equipo, estadoPozo, nombreYacimiento)";
             sentenciaSQL = sentenciaSQL + " VALUES (" + pozo.getCantidadDeProductoExtraido() + ",'" + pozo.getEquipo()
-                    +"','" + pozo.getEstado() + "','" + pozo.getNomrbeSuYacimiento() + "')"; //si falla corregir comillas IMPORTANTE
+                    +"','" + pozo.getEstado() + "','" + pozo.getNombreSuYacimiento() + "')"; //si falla corregir comillas IMPORTANTE
             
             this.db.statement(sentenciaSQL);
             sentenciaSQL = null;
