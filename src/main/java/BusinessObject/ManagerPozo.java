@@ -5,13 +5,13 @@ import TransferObject.Pozo;
 
 public class ManagerPozo {
 
-    public Pozo ingresoDatos(int cantidadDeProductoExtraido, String equipo, int estado, String nombreYacimiento) {
+    public Pozo ingresoDatos(int cantidadDeProductoExtraido, String equipo, int estadoPozo, String nombreYacimiento) {
         Pozo pozo = new Pozo();
 
         pozo.setCantidadDeProductoExtraido(cantidadDeProductoExtraido);
         pozo.setEquipo(equipo);
-        pozo.setEstado(estado);
-        pozo.setNomrbeSuYacimiento(nombreYacimiento);
+        pozo.setEstado(estadoPozo);
+        pozo.setNombreSuYacimiento(nombreYacimiento);
 
         return pozo;
     }
