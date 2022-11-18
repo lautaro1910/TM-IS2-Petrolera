@@ -1,15 +1,11 @@
 package TransferObject;
 
-enum TipoCamion {
-    porta, carreton, chupa, grua, batea, tracker;
-}
-
 public class Camion {
     private String fechaInicioServicio;
     private String fechaFinServicio;
     private String mercancia;
     private String horasServicio;
-    private TipoCamion tipoCamion;
+    private String tipoCamion;
 
     public Camion() {
         this.fechaInicioServicio = "null";
@@ -18,8 +14,7 @@ public class Camion {
         this.horasServicio = "null";
     }
 
-    public Camion(String fechaInicioServicio, String fechaFinServicio, String mercancia, String horasServicio,
-            TipoCamion tipoCamion) {
+    public Camion(String fechaInicioServicio, String fechaFinServicio, String mercancia,String tipoCamion, String horasServicio) {
         this.fechaInicioServicio = fechaInicioServicio;
         this.fechaFinServicio = fechaFinServicio;
         this.mercancia = mercancia;
@@ -59,11 +54,11 @@ public class Camion {
         this.horasServicio = horasServicio;
     }
 
-    public TipoCamion getTipoCamion() {
+    public String getTipoCamion() {
         return tipoCamion;
     }
 
-    public void setTipoCamion(TipoCamion tipoCamion) {
+    public void setTipoCamion(String tipoCamion) {
         this.tipoCamion = tipoCamion;
     }
 

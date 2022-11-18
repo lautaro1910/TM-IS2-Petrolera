@@ -1,54 +1,58 @@
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Camion.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\FechaViajeDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerCompany.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerCamionPropio.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\FechaViaje.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\HorarioDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\View\TSBVentana.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Company.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\TSB.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerYacimiento.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\JefeDeArea.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\JefeDeAreaDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerOperario.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerContratoCamion.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Pozo.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\CamionPropioDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\OperarioDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Horario.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\ChoferDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Empleado.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\PozoDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\MaquinaDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Chofer.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerMaquina.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerEmpleado.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Operario.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\ContratoCamion.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\ContratoCamionDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerFechaViaje.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\YacimientoDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\ContratoMaquinaDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Viaje.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerChofer.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Supervisor.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerViaje.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\CamionDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Maquina.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\CamionPropio.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\Yacimiento.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerContratoMaquina.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\SupevisorDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\ViajeDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerHorario.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\ContratoMaquina.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\CompanyDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerJefeDeArea.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerCamionAlquilado.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\ConectionBD\Conection_BD.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\CamionAlquiladoDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\DAO\EmpleadoDAO.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerCamion.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\TransferObject\CamionAlquilado.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerPozo.java
-C:\Users\Lautaro\Desktop\Petrolera\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerSupervisor.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\ConectionBD\Conection_BD.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\CamionPropioDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerYacimiento.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\FechaViajeDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerContratoCamion.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Viaje.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\Add.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\CamionPropio.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Yacimiento.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\ChoferDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerSupervisor.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerContratoMaquina.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\View\TSBVentana.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\CamionAlquiladoDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\EmpleadoDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\JefeDeArea.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\CamionDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerEmpleado.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\ContratoMaquina.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Maquina.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerViaje.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Supervisor.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerCamion.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerCompany.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\Addfunc.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerChofer.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\YacimientoDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\ContratoMaquinaDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\MaquinaDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\IteratorFunc.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\ContratoCamion.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\SupevisorDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerCamionAlquilado.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerHorario.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\CompanyDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\FechaViaje.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Operario.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\Iteratorr.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\CamionAlquilado.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerJefeDeArea.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Company.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\JefeDeAreaDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerMaquina.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\ContratoCamionDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Camion.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\TSB.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerCamionPropio.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\HorarioDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerFechaViaje.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerOperario.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\PozoDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\OperarioDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Empleado.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\BusinessObject\ManagerPozo.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Chofer.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\DAO\ViajeDAO.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Horario.java
+C:\Users\diela\Desktop\Universidad\3 Ingenieria de Software II\PROYECTO2022\TM-IS2-Petrolera\src\main\java\TransferObject\Pozo.java

@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static jdk.nashorn.internal.runtime.Debug.id;
 
 public class Conection_BD {
 
@@ -28,7 +29,7 @@ public class Conection_BD {
         // servidor = "localhost";
         BD_NAME = "TSB";
         BD_USER = "postgres";
-        BD_PWD = "admin";
+        BD_PWD = "Popea202";
         BD_URL = "jdbc:postgresql://localhost:5432/" + BD_NAME;
     }
 
@@ -100,5 +101,15 @@ public class Conection_BD {
             Logger.getLogger(Conection_BD.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    
+    public boolean ifExists(String sSQL, String nId) throws SQLException {
+        PreparedStatement ps = this.conexion.prepareStatement(sSQL);
+        ps.setString(1, nId);
+        ResultSet rs = ps.executeQuery();
+        return rs.next();
+    }
+    
+    //Luego hay que agregar este metodo a modo de pregunta en los DAO, Si existe, hacelo, sino cartelito
 
 }

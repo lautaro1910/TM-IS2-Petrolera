@@ -1,26 +1,31 @@
 
 package BusinessObject;
 
+import DAO.YacimientoDAO;
 import TransferObject.Yacimiento;
+import java.util.Set;
 
 public class ManagerYacimiento {
+    YacimientoDAO yd = new YacimientoDAO();
+    
     public Yacimiento ingresoDatos(String localizacion, int estadoYacimiento, String nombreYacimiento) {
         Yacimiento yacimiento = new Yacimiento();
 
         yacimiento.setLocalizacionOrigen(localizacion);
         yacimiento.setEstadoYacimiento(estadoYacimiento);
         yacimiento.setNombreYacimiento(nombreYacimiento);
-
+        
         return yacimiento;
     }
 
-    public Yacimiento pasoDatos(Yacimiento yacimiento) {
-        Yacimiento yacimientoAux = new Yacimiento();
+    public void pasoDatos(Yacimiento yacimiento) {
+        yd.create(yacimiento);
 
-        yacimientoAux.setLocalizacionOrigen(yacimiento.getLocalizacionOrigen());
-        yacimientoAux.setEstadoYacimiento(yacimiento.getEstadoYacimiento());
-        yacimientoAux.setNombreYacimiento(yacimiento.getNombreYacimiento());
-
-        return yacimientoAux;
+    }
+    
+    public Set obtengoLista(){
+        Set listaObtenida=yd.getDAO();
+        
+        return listaObtenida;
     }
 }
