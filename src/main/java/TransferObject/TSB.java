@@ -4,7 +4,7 @@
  */
 
 package TransferObject;
-
+import View.TSBVentana;
 /**
  *
  * @author Usuario
@@ -12,6 +12,8 @@ package TransferObject;
 public class TSB {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+           TSBVentana ventana = new TSBVentana();
+           ventana.setVisible(true);
+           
     }
 }

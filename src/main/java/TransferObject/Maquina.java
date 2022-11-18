@@ -5,23 +5,29 @@ enum EstadoMaquina {
 }
 
 public class Maquina {
-    private EstadoMaquina estadoMaquina;
+    private String estadoMaquina;
     private String nombreMaquina;
+    private int idMaquinaria;
 
     public Maquina() {
         this.nombreMaquina = "null";
     }
 
-    public Maquina(EstadoMaquina estadoMaquina, String nombreMaquina) {
+    public Maquina(String estadoMaquina, String nombreMaquina, int idMaquinaria) {
         this.estadoMaquina = estadoMaquina;
         this.nombreMaquina = nombreMaquina;
+        this.idMaquinaria = idMaquinaria;
+    }
+    
+    public int getIdMaquina(){
+        return idMaquinaria;
     }
 
-    public EstadoMaquina getEstadoMaquina() {
+    public String getEstadoMaquina() {
         return estadoMaquina;
     }
 
-    public void setEstadoMaquina(EstadoMaquina estadoMaquina) {
+    public void setEstadoMaquina(String estadoMaquina) {
         this.estadoMaquina = estadoMaquina;
     }
 

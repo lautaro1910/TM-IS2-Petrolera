@@ -13,7 +13,7 @@ public class JefeDeArea extends Empleado {
 
     public JefeDeArea(String usuario, String contraseña, String nombre, String apellido, String DNI, int estado,
             String diagrama, String telefono, int numInterno) {
-        super(nombre, apellido, DNI, estado, diagrama, telefono, numInterno);
+        super(numInterno, nombre, apellido, DNI, estado, estado, diagrama);
         this.usuario = usuario;
         this.contraseña = contraseña;
     }

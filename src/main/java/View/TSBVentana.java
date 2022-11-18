@@ -4,19 +4,30 @@
  */
 package View;
 
+import BusinessObject.ManagerCamion;
+import BusinessObject.ManagerChofer;
+import BusinessObject.ManagerMaquina;
 import BusinessObject.ManagerPozo;
 import BusinessObject.ManagerYacimiento;
-import DAO.YacimientoDAO;
-import DAO.PozoDAO;
+import DAO.Addfunc;
+import TransferObject.Camion;
+import TransferObject.Chofer;
 import TransferObject.JefeDeArea;
+import TransferObject.Maquina;
 import TransferObject.Supervisor;
 import TransferObject.Yacimiento;
 import TransferObject.Pozo;
-
+import DAO.Iteratorr;
 import java.awt.Panel;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
+//import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,10 +38,14 @@ public class TSBVentana extends javax.swing.JFrame {
 
     //Variables y objetos
     ManagerYacimiento my = new ManagerYacimiento();
-    YacimientoDAO yd = new YacimientoDAO();
 
     ManagerPozo mp = new ManagerPozo();
-    PozoDAO pd = new PozoDAO();
+
+    ManagerMaquina mm = new ManagerMaquina();
+
+    ManagerChofer mchof = new ManagerChofer();
+
+    ManagerCamion mcam = new ManagerCamion();
 
     String nombYac = "";
     String nombPozo = "";
@@ -39,14 +54,22 @@ public class TSBVentana extends javax.swing.JFrame {
     public TSBVentana() {
         initComponents();
         panelInicio.setVisible(true);
-
+        setLocationRelativeTo(null);
+        this.setResizable(false);
         panelAgregarPozo.setVisible(false);
         panelAgregarYacimiento.setVisible(false);
+        panelAgregarCantidadExtraida.setVisible(false);
+
         panelListadoPozo.setVisible(false);
         panelListadoYacimiento.setVisible(false);
+        panelListadoMaquinaria.setVisible(false);
+
         panelMenuPozo.setVisible(false);
         panelMenuPrincipal.setVisible(false);
         panelMenuYacimiento.setVisible(false);
+        panelMenuMaquinas.setVisible(false);
+        panelRegistrarIngreso.setVisible(false);
+        panelListadoCamiones.setVisible(false);
     }
 
     //Metodos
@@ -60,6 +83,7 @@ public class TSBVentana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         panelInicio = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -138,13 +162,13 @@ public class TSBVentana extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         botonSalirLY = new javax.swing.JButton();
         jLabel52 = new javax.swing.JLabel();
-        BotonMenuYacimiento1 = new javax.swing.JPanel();
+        BotonAcciones = new javax.swing.JPanel();
         jLabel86 = new javax.swing.JLabel();
         jLabel88 = new javax.swing.JLabel();
-        BotonMenuEmpleados1 = new javax.swing.JPanel();
+        BotonMaquinaria = new javax.swing.JPanel();
         jLabel89 = new javax.swing.JLabel();
         jLabel91 = new javax.swing.JLabel();
-        pozosDeYacimientoButton = new javax.swing.JPanel();
+        botonMenuPozos = new javax.swing.JPanel();
         jLabel92 = new javax.swing.JLabel();
         jLabel94 = new javax.swing.JLabel();
         panelMenuYacimiento = new javax.swing.JPanel();
@@ -169,6 +193,70 @@ public class TSBVentana extends javax.swing.JFrame {
         jLabel61 = new javax.swing.JLabel();
         BotonSalirMY = new javax.swing.JButton();
         jLabel58 = new javax.swing.JLabel();
+        panelMenuMaquinas = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel83 = new javax.swing.JLabel();
+        jLabel67 = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
+        jLabel85 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        botonAtrasMM = new javax.swing.JButton();
+        botonSalirMM = new javax.swing.JButton();
+        jLabel87 = new javax.swing.JLabel();
+        BotonMenuMaquinaria = new javax.swing.JPanel();
+        jLabel95 = new javax.swing.JLabel();
+        jLabel96 = new javax.swing.JLabel();
+        BotonMenuEmpleados3 = new javax.swing.JPanel();
+        jLabel99 = new javax.swing.JLabel();
+        jLabel100 = new javax.swing.JLabel();
+        panelMenuPozo = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jButton27 = new javax.swing.JButton();
+        BotonEstadisticas = new javax.swing.JPanel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        BotonModStock = new javax.swing.JPanel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel76 = new javax.swing.JLabel();
+        jButton28 = new javax.swing.JButton();
+        jLabel70 = new javax.swing.JLabel();
+        BotonEgresoP = new javax.swing.JPanel();
+        jLabel103 = new javax.swing.JLabel();
+        jLabel104 = new javax.swing.JLabel();
+        jLabel102 = new javax.swing.JLabel();
+        BotonCantidadExtraida = new javax.swing.JPanel();
+        jLabel105 = new javax.swing.JLabel();
+        jLabel106 = new javax.swing.JLabel();
+        jLabel107 = new javax.swing.JLabel();
+        BotonListadoPozos = new javax.swing.JPanel();
+        jLabel112 = new javax.swing.JLabel();
+        jLabel113 = new javax.swing.JLabel();
+        jLabel114 = new javax.swing.JLabel();
+        BotonIngresoP = new javax.swing.JPanel();
+        jLabel115 = new javax.swing.JLabel();
+        jLabel116 = new javax.swing.JLabel();
+        jLabel117 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel82 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        jLabel71 = new javax.swing.JLabel();
+        jLabel73 = new javax.swing.JLabel();
+        panelListadoMaquinaria = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel90 = new javax.swing.JLabel();
+        jLabel93 = new javax.swing.JLabel();
+        jLabel97 = new javax.swing.JLabel();
+        jLabel98 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        botonAtrasLM = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaListadoMaquinaria = new javax.swing.JTable();
+        botonSalirLM = new javax.swing.JButton();
+        jLabel101 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        campoNombreYac = new javax.swing.JTextField();
         panelListadoPozo = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel80 = new javax.swing.JLabel();
@@ -177,19 +265,23 @@ public class TSBVentana extends javax.swing.JFrame {
         jLabel64 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         listadoPozoAtrasButton = new javax.swing.JButton();
-        listadoPozoDELETEButton = new javax.swing.JButton();
-        listadoPozoMODIFYButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         pozosDeYacimientosTable = new javax.swing.JTable();
         botonSalirLP = new javax.swing.JButton();
         jLabel62 = new javax.swing.JLabel();
+        botonEliminarPozo = new javax.swing.JPanel();
+        jLabel121 = new javax.swing.JLabel();
+        jLabel125 = new javax.swing.JLabel();
+        botonModificarPozo = new javax.swing.JPanel();
+        jLabel126 = new javax.swing.JLabel();
+        jLabel127 = new javax.swing.JLabel();
         panelAgregarPozo = new javax.swing.JPanel();
-        panelAzulingresoPozo = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
         jLabel81 = new javax.swing.JLabel();
         minimizarButton = new javax.swing.JLabel();
         jLabel69 = new javax.swing.JLabel();
         expandirButton = new javax.swing.JLabel();
-        panelContenidoIngresoPozo = new javax.swing.JPanel();
+        jPanel24 = new javax.swing.JPanel();
         botonAtrasIP = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -200,31 +292,80 @@ public class TSBVentana extends javax.swing.JFrame {
         ingresarPozoButton = new javax.swing.JButton();
         yacimientoDePozo = new javax.swing.JComboBox<>();
         jLabel66 = new javax.swing.JLabel();
-        panelMenuPozo = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jButton27 = new javax.swing.JButton();
-        BotonListadoFacturas9 = new javax.swing.JPanel();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
+        panelRegistrarIngreso = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel108 = new javax.swing.JLabel();
         jLabel74 = new javax.swing.JLabel();
-        BotonListadoFacturas10 = new javax.swing.JPanel();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        jLabel75 = new javax.swing.JLabel();
-        BotonListadoFacturas11 = new javax.swing.JPanel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel54 = new javax.swing.JLabel();
-        jLabel76 = new javax.swing.JLabel();
-        jButton28 = new javax.swing.JButton();
-        jLabel70 = new javax.swing.JLabel();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel82 = new javax.swing.JLabel();
-        jLabel72 = new javax.swing.JLabel();
-        jLabel71 = new javax.swing.JLabel();
-        jLabel73 = new javax.swing.JLabel();
+        jLabel109 = new javax.swing.JLabel();
+        jLabel110 = new javax.swing.JLabel();
+        jPanel20 = new javax.swing.JPanel();
+        botonAtrasMM1 = new javax.swing.JButton();
+        botonSalirMM1 = new javax.swing.JButton();
+        jLabel111 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        campoNombreYacimientoTrae = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel118 = new javax.swing.JLabel();
+        BotonRegistroIngreso = new javax.swing.JButton();
+        campoBusquedaCamion = new javax.swing.JTextField();
+        campoBusquedaChofer = new javax.swing.JTextField();
+        comboListadoPozosxYac = new javax.swing.JComboBox<>();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel129 = new javax.swing.JLabel();
+        campoTelefonoChofer = new javax.swing.JTextField();
+        campoDniChofer = new javax.swing.JTextField();
+        campoNombreChofer = new javax.swing.JTextField();
+        campoApellidoChofer = new javax.swing.JTextField();
+        jLabel130 = new javax.swing.JLabel();
+        campoTipoCamion = new javax.swing.JTextField();
+        campoTipoMercancia = new javax.swing.JTextField();
+        botonBuscarChofCam = new javax.swing.JButton();
+        jLabel131 = new javax.swing.JLabel();
+        jLabel132 = new javax.swing.JLabel();
+        jLabel133 = new javax.swing.JLabel();
+        jLabel134 = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
+        jPanel26 = new javax.swing.JPanel();
+        jLabel135 = new javax.swing.JLabel();
+        jLabel136 = new javax.swing.JLabel();
+        fechaIngreso = new com.toedter.calendar.JDateChooser();
+        panelAgregarCantidadExtraida = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel119 = new javax.swing.JLabel();
+        minimizarButton1 = new javax.swing.JLabel();
+        jLabel120 = new javax.swing.JLabel();
+        expandirButton1 = new javax.swing.JLabel();
+        jPanel22 = new javax.swing.JPanel();
+        botonAtrasIP1 = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        campoNombreYacICE = new javax.swing.JTextField();
+        jLabel122 = new javax.swing.JLabel();
+        botonCancelarIP1 = new javax.swing.JButton();
+        botonIngresarCantidad = new javax.swing.JButton();
+        nombrePozoICE = new javax.swing.JComboBox<>();
+        jLabel123 = new javax.swing.JLabel();
+        jLabel124 = new javax.swing.JLabel();
+        campoCantidadExtraidaICE = new javax.swing.JTextField();
+        panelListadoCamiones = new javax.swing.JPanel();
+        jPanel27 = new javax.swing.JPanel();
+        jLabel137 = new javax.swing.JLabel();
+        jLabel138 = new javax.swing.JLabel();
+        jLabel139 = new javax.swing.JLabel();
+        jLabel140 = new javax.swing.JLabel();
+        jPanel28 = new javax.swing.JPanel();
+        botonAtrasLM1 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tablaListadoMaquinaria1 = new javax.swing.JTable();
+        botonSalirLM1 = new javax.swing.JButton();
+        jLabel141 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1000, 700));
+        setMinimumSize(new java.awt.Dimension(1000, 700));
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
+        panelInicio.setToolTipText("Ingrese Usuario");
         panelInicio.setMaximumSize(new java.awt.Dimension(1000, 700));
         panelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -272,14 +413,6 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 120, 50));
 
         CampoPass.setToolTipText("");
-        CampoPass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                CampoPassKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                CampoPassKeyTyped(evt);
-            }
-        });
         jPanel2.add(CampoPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 270, 30));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -300,7 +433,6 @@ public class TSBVentana extends javax.swing.JFrame {
         });
         jPanel2.add(BotonIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 170, 40));
 
-        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jSeparator1.setAlignmentX(1.0F);
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 430, 20));
@@ -310,22 +442,9 @@ public class TSBVentana extends javax.swing.JFrame {
         BotonRegistrarse.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BotonRegistrarse.setText("Registrarse");
         BotonRegistrarse.setToolTipText("Registrarse por primera vez");
-        BotonRegistrarse.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                BotonRegistrarseMousePressed(evt);
-            }
-        });
         jPanel2.add(BotonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 570, 190, 50));
 
         CampoUsuario.setToolTipText("");
-        CampoUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                CampoUsuarioKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                CampoUsuarioKeyTyped(evt);
-            }
-        });
         jPanel2.add(CampoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 270, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
@@ -340,7 +459,7 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        botonSalirMenuP.setBackground(new java.awt.Color(204, 204, 204));
+        botonSalirMenuP.setBackground(new java.awt.Color(255, 102, 51));
         botonSalirMenuP.setText("Salir");
         botonSalirMenuP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -356,11 +475,6 @@ public class TSBVentana extends javax.swing.JFrame {
 
         BotonMenuMaquinas.setBackground(new java.awt.Color(150, 187, 39));
         BotonMenuMaquinas.setToolTipText("Listado de información asociada a los comprobantes");
-        BotonMenuMaquinas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonMenuMaquinasMouseClicked(evt);
-            }
-        });
 
         jLabel21.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -402,21 +516,7 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel3.add(BotonMenuMaquinas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 160, 140));
 
         BotonMenuEmpleados.setBackground(new java.awt.Color(150, 187, 39));
-        BotonMenuEmpleados.setToolTipText("Listado de información asociada a los comprobantes");
-        BotonMenuEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonMenuEmpleadosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotonMenuEmpleadosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotonMenuEmpleadosMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                BotonMenuEmpleadosMousePressed(evt);
-            }
-        });
+        BotonMenuEmpleados.setToolTipText("");
 
         jLabel23.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -458,21 +558,7 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel3.add(BotonMenuEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 160, 140));
 
         BotonMenuClientes.setBackground(new java.awt.Color(150, 187, 39));
-        BotonMenuClientes.setToolTipText("Listado de información asociada a los comprobantes");
-        BotonMenuClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonMenuClientesMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotonMenuClientesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotonMenuClientesMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                BotonMenuClientesMousePressed(evt);
-            }
-        });
+        BotonMenuClientes.setToolTipText("");
 
         jLabel26.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -516,9 +602,6 @@ public class TSBVentana extends javax.swing.JFrame {
         BotonMenuYacimiento.setBackground(new java.awt.Color(150, 187, 39));
         BotonMenuYacimiento.setToolTipText("Listado de información asociada a los comprobantes");
         BotonMenuYacimiento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonMenuYacimientoMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonMenuYacimientoMouseEntered(evt);
             }
@@ -570,12 +653,7 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel3.add(BotonMenuYacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 160, 140));
 
         BotonMenuContratos.setBackground(new java.awt.Color(150, 187, 39));
-        BotonMenuContratos.setToolTipText("Listado de información asociada a los comprobantes");
-        BotonMenuContratos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonMenuContratosMouseClicked(evt);
-            }
-        });
+        BotonMenuContratos.setToolTipText("");
 
         jLabel32.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -617,10 +695,10 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel3.add(BotonMenuContratos, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, -1, -1));
 
         BotonMenuCamiones.setBackground(new java.awt.Color(150, 187, 39));
-        BotonMenuCamiones.setToolTipText("Listado de información asociada a los comprobantes");
+        BotonMenuCamiones.setToolTipText("");
         BotonMenuCamiones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonMenuCamionesMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BotonMenuCamionesMousePressed(evt);
             }
         });
 
@@ -754,9 +832,6 @@ public class TSBVentana extends javax.swing.JFrame {
 
         CampoNombreYac.setToolTipText("");
         CampoNombreYac.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                CampoNombreYacKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 CampoNombreYacKeyTyped(evt);
             }
@@ -770,15 +845,7 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 100, 50));
 
         CampoLocalización.setToolTipText("");
-        CampoLocalización.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CampoLocalizaciónActionPerformed(evt);
-            }
-        });
         CampoLocalización.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                CampoLocalizaciónKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 CampoLocalizaciónKeyTyped(evt);
             }
@@ -794,17 +861,27 @@ public class TSBVentana extends javax.swing.JFrame {
         comboEstadoYac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         jPanel6.add(comboEstadoYac, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 270, 30));
 
-        BotonCancelarIngYac.setBackground(new java.awt.Color(204, 204, 204));
-        BotonCancelarIngYac.setText("Cancelar");
+        BotonCancelarIngYac.setBackground(new java.awt.Color(255, 102, 51));
+        BotonCancelarIngYac.setText("Salir");
         BotonCancelarIngYac.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BotonCancelarIngYacMousePressed(evt);
+            }
+        });
+        BotonCancelarIngYac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCancelarIngYacActionPerformed(evt);
             }
         });
         jPanel6.add(BotonCancelarIngYac, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
 
         BotonIngresarYacimiento.setBackground(new java.awt.Color(150, 187, 39));
         BotonIngresarYacimiento.setText("Ingresar Yacimiento");
+        BotonIngresarYacimiento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BotonIngresarYacimientoMousePressed(evt);
+            }
+        });
         BotonIngresarYacimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonIngresarYacimientoActionPerformed(evt);
@@ -852,6 +929,9 @@ public class TSBVentana extends javax.swing.JFrame {
         });
         jPanel10.add(botonAtrasLY, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, 110, 30));
 
+        jScrollPane1.setBackground(new java.awt.Color(153, 153, 0));
+        jScrollPane1.setForeground(new java.awt.Color(102, 153, 0));
+        jScrollPane1.setRequestFocusEnabled(false);
         jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jScrollPane1MouseClicked(evt);
@@ -885,13 +965,14 @@ public class TSBVentana extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setHeaderValue("Localización");
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jPanel10.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 670, 470));
 
-        botonSalirLY.setBackground(new java.awt.Color(204, 204, 204));
+        botonSalirLY.setBackground(new java.awt.Color(255, 102, 51));
         botonSalirLY.setText("Salir");
         botonSalirLY.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -903,22 +984,8 @@ public class TSBVentana extends javax.swing.JFrame {
         jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
         jPanel10.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        BotonMenuYacimiento1.setBackground(new java.awt.Color(150, 187, 39));
-        BotonMenuYacimiento1.setToolTipText("Listado de información asociada a los comprobantes");
-        BotonMenuYacimiento1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonMenuYacimiento1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotonMenuYacimiento1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotonMenuYacimiento1MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                BotonMenuYacimiento1MousePressed(evt);
-            }
-        });
+        BotonAcciones.setBackground(new java.awt.Color(150, 187, 39));
+        BotonAcciones.setToolTipText("");
 
         jLabel86.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel86.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -926,22 +993,22 @@ public class TSBVentana extends javax.swing.JFrame {
 
         jLabel88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/yacimiento.png"))); // NOI18N
 
-        javax.swing.GroupLayout BotonMenuYacimiento1Layout = new javax.swing.GroupLayout(BotonMenuYacimiento1);
-        BotonMenuYacimiento1.setLayout(BotonMenuYacimiento1Layout);
-        BotonMenuYacimiento1Layout.setHorizontalGroup(
-            BotonMenuYacimiento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonMenuYacimiento1Layout.createSequentialGroup()
+        javax.swing.GroupLayout BotonAccionesLayout = new javax.swing.GroupLayout(BotonAcciones);
+        BotonAcciones.setLayout(BotonAccionesLayout);
+        BotonAccionesLayout.setHorizontalGroup(
+            BotonAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonAccionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel86, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(BotonMenuYacimiento1Layout.createSequentialGroup()
+            .addGroup(BotonAccionesLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(jLabel88)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        BotonMenuYacimiento1Layout.setVerticalGroup(
-            BotonMenuYacimiento1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonMenuYacimiento1Layout.createSequentialGroup()
+        BotonAccionesLayout.setVerticalGroup(
+            BotonAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonAccionesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel88)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -949,91 +1016,99 @@ public class TSBVentana extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        jPanel10.add(BotonMenuYacimiento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 100, 160, 90));
+        jPanel10.add(BotonAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 70, 160, 120));
 
-        BotonMenuEmpleados1.setBackground(new java.awt.Color(150, 187, 39));
-        BotonMenuEmpleados1.setToolTipText("Listado de información asociada a los comprobantes");
-        BotonMenuEmpleados1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonMenuEmpleados1MouseClicked(evt);
-            }
+        BotonMaquinaria.setBackground(new java.awt.Color(150, 187, 39));
+        BotonMaquinaria.setToolTipText("Listado de información asociada a los comprobantes");
+        BotonMaquinaria.setMaximumSize(new java.awt.Dimension(116, 150));
+        BotonMaquinaria.setMinimumSize(new java.awt.Dimension(116, 150));
+        BotonMaquinaria.setPreferredSize(new java.awt.Dimension(116, 150));
+        BotonMaquinaria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotonMenuEmpleados1MouseEntered(evt);
+                BotonMaquinariaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotonMenuEmpleados1MouseExited(evt);
+                BotonMaquinariaMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                BotonMenuEmpleados1MousePressed(evt);
+                BotonMaquinariaMousePressed(evt);
             }
         });
 
         jLabel89.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel89.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel89.setText("Maquinaria/Camiones");
+        jLabel89.setText("Maquinaria");
 
-        jLabel91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/empleado.png"))); // NOI18N
+        jLabel91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/camion.png"))); // NOI18N
 
-        javax.swing.GroupLayout BotonMenuEmpleados1Layout = new javax.swing.GroupLayout(BotonMenuEmpleados1);
-        BotonMenuEmpleados1.setLayout(BotonMenuEmpleados1Layout);
-        BotonMenuEmpleados1Layout.setHorizontalGroup(
-            BotonMenuEmpleados1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonMenuEmpleados1Layout.createSequentialGroup()
+        javax.swing.GroupLayout BotonMaquinariaLayout = new javax.swing.GroupLayout(BotonMaquinaria);
+        BotonMaquinaria.setLayout(BotonMaquinariaLayout);
+        BotonMaquinariaLayout.setHorizontalGroup(
+            BotonMaquinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMaquinariaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel89, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonMenuEmpleados1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(BotonMaquinariaLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
                 .addComponent(jLabel91)
-                .addGap(57, 57, 57))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        BotonMenuEmpleados1Layout.setVerticalGroup(
-            BotonMenuEmpleados1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonMenuEmpleados1Layout.createSequentialGroup()
+        BotonMaquinariaLayout.setVerticalGroup(
+            BotonMaquinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMaquinariaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel91)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel89)
                 .addGap(43, 43, 43))
         );
 
-        jPanel10.add(BotonMenuEmpleados1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 220, 160, 100));
+        jPanel10.add(BotonMaquinaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 240, 160, 120));
 
-        pozosDeYacimientoButton.setBackground(new java.awt.Color(150, 187, 39));
-        pozosDeYacimientoButton.setToolTipText("Listado de información asociada a los comprobantes");
-        pozosDeYacimientoButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pozosDeYacimientoButtonMouseClicked(evt);
+        botonMenuPozos.setBackground(new java.awt.Color(150, 187, 39));
+        botonMenuPozos.setToolTipText("");
+        botonMenuPozos.setMaximumSize(new java.awt.Dimension(116, 150));
+        botonMenuPozos.setMinimumSize(new java.awt.Dimension(116, 150));
+        botonMenuPozos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonMenuPozosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonMenuPozosMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonMenuPozosMousePressed(evt);
             }
         });
 
         jLabel92.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel92.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel92.setText("Pozos Pertenecientes");
+        jLabel92.setText("Ver Pozos");
 
-        jLabel94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cliente.png"))); // NOI18N
+        jLabel94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/pozo.png"))); // NOI18N
         jLabel94.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel94MouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout pozosDeYacimientoButtonLayout = new javax.swing.GroupLayout(pozosDeYacimientoButton);
-        pozosDeYacimientoButton.setLayout(pozosDeYacimientoButtonLayout);
-        pozosDeYacimientoButtonLayout.setHorizontalGroup(
-            pozosDeYacimientoButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pozosDeYacimientoButtonLayout.createSequentialGroup()
+        javax.swing.GroupLayout botonMenuPozosLayout = new javax.swing.GroupLayout(botonMenuPozos);
+        botonMenuPozos.setLayout(botonMenuPozosLayout);
+        botonMenuPozosLayout.setHorizontalGroup(
+            botonMenuPozosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonMenuPozosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel92, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(pozosDeYacimientoButtonLayout.createSequentialGroup()
+            .addGroup(botonMenuPozosLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(jLabel94)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pozosDeYacimientoButtonLayout.setVerticalGroup(
-            pozosDeYacimientoButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pozosDeYacimientoButtonLayout.createSequentialGroup()
+        botonMenuPozosLayout.setVerticalGroup(
+            botonMenuPozosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonMenuPozosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel94)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1041,7 +1116,7 @@ public class TSBVentana extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
         );
 
-        jPanel10.add(pozosDeYacimientoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 350, 160, 100));
+        jPanel10.add(botonMenuPozos, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 420, 160, 120));
 
         panelListadoYacimiento.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
 
@@ -1082,7 +1157,7 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel8.add(botonAtrasMY, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 590, 110, 30));
 
         BotonListadoYacimiento.setBackground(new java.awt.Color(150, 187, 39));
-        BotonListadoYacimiento.setToolTipText("Listado de información asociada a los comprobantes");
+        BotonListadoYacimiento.setToolTipText("");
         BotonListadoYacimiento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonListadoYacimientoMouseEntered(evt);
@@ -1135,7 +1210,7 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel8.add(BotonListadoYacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 160, 140));
 
         BotonAgregarYacimiento.setBackground(new java.awt.Color(150, 187, 39));
-        BotonAgregarYacimiento.setToolTipText("Listado de información asociada a los comprobantes");
+        BotonAgregarYacimiento.setToolTipText("");
         BotonAgregarYacimiento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonAgregarYacimientoMouseEntered(evt);
@@ -1188,11 +1263,8 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel8.add(BotonAgregarYacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, 140));
 
         BotonAgregarPozo.setBackground(new java.awt.Color(150, 187, 39));
-        BotonAgregarPozo.setToolTipText("Listado de información asociada a los comprobantes");
+        BotonAgregarPozo.setToolTipText("");
         BotonAgregarPozo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonAgregarPozoMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonAgregarPozoMouseEntered(evt);
             }
@@ -1219,32 +1291,37 @@ public class TSBVentana extends javax.swing.JFrame {
         BotonAgregarPozoLayout.setHorizontalGroup(
             BotonAgregarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BotonAgregarPozoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(BotonAgregarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(BotonAgregarPozoLayout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(jLabel61)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(BotonAgregarPozoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonAgregarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         BotonAgregarPozoLayout.setVerticalGroup(
             BotonAgregarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BotonAgregarPozoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel61)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel44)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel45)
-                .addGap(24, 24, 24))
+                .addGap(38, 38, 38))
         );
 
         jPanel8.add(BotonAgregarPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 230, -1, 140));
 
-        BotonSalirMY.setBackground(new java.awt.Color(204, 204, 204));
+        BotonSalirMY.setBackground(new java.awt.Color(255, 102, 51));
         BotonSalirMY.setText("Salir");
+        BotonSalirMY.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BotonSalirMYMousePressed(evt);
+            }
+        });
         BotonSalirMY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonSalirMYActionPerformed(evt);
@@ -1256,6 +1333,577 @@ public class TSBVentana extends javax.swing.JFrame {
         jPanel8.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         panelMenuYacimiento.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
+
+        panelMenuMaquinas.setMaximumSize(new java.awt.Dimension(1000, 700));
+        panelMenuMaquinas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel15.setBackground(new java.awt.Color(29, 59, 115));
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel83.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel83.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel83.setText("MENU MAQUINARIA");
+        jPanel15.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+
+        jLabel67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cerrar.png"))); // NOI18N
+        jPanel15.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, -1, -1));
+
+        jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/minimizar.png"))); // NOI18N
+        jPanel15.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, -1, -1));
+
+        jLabel85.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/maximizar.png"))); // NOI18N
+        jPanel15.add(jLabel85, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
+
+        panelMenuMaquinas.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
+
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        botonAtrasMM.setBackground(new java.awt.Color(204, 204, 204));
+        botonAtrasMM.setText("Atrás");
+        botonAtrasMM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonAtrasMMMousePressed(evt);
+            }
+        });
+        jPanel16.add(botonAtrasMM, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, 110, 30));
+
+        botonSalirMM.setBackground(new java.awt.Color(255, 102, 51));
+        botonSalirMM.setText("Salir");
+        botonSalirMM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonSalirMMMousePressed(evt);
+            }
+        });
+        jPanel16.add(botonSalirMM, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
+
+        jLabel87.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
+        jPanel16.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        BotonMenuMaquinaria.setBackground(new java.awt.Color(150, 187, 39));
+        BotonMenuMaquinaria.setToolTipText("Listado de información asociada a los comprobantes");
+        BotonMenuMaquinaria.setMaximumSize(new java.awt.Dimension(116, 150));
+        BotonMenuMaquinaria.setMinimumSize(new java.awt.Dimension(116, 150));
+        BotonMenuMaquinaria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BotonMenuMaquinariaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BotonMenuMaquinariaMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BotonMenuMaquinariaMousePressed(evt);
+            }
+        });
+
+        jLabel95.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel95.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel95.setText("Maquinaria");
+
+        jLabel96.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/maquina.png"))); // NOI18N
+
+        javax.swing.GroupLayout BotonMenuMaquinariaLayout = new javax.swing.GroupLayout(BotonMenuMaquinaria);
+        BotonMenuMaquinaria.setLayout(BotonMenuMaquinariaLayout);
+        BotonMenuMaquinariaLayout.setHorizontalGroup(
+            BotonMenuMaquinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuMaquinariaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel95, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(BotonMenuMaquinariaLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel96, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        BotonMenuMaquinariaLayout.setVerticalGroup(
+            BotonMenuMaquinariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuMaquinariaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel96, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel95)
+                .addGap(53, 53, 53))
+        );
+
+        jPanel16.add(BotonMenuMaquinaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 160, 120));
+
+        BotonMenuEmpleados3.setBackground(new java.awt.Color(150, 187, 39));
+        BotonMenuEmpleados3.setToolTipText("Listado de información asociada a los comprobantes");
+        BotonMenuEmpleados3.setMaximumSize(new java.awt.Dimension(116, 150));
+        BotonMenuEmpleados3.setMinimumSize(new java.awt.Dimension(116, 150));
+        BotonMenuEmpleados3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BotonMenuEmpleados3MousePressed(evt);
+            }
+        });
+
+        jLabel99.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel99.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel99.setText("Camiones");
+
+        jLabel100.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/camion.png"))); // NOI18N
+
+        javax.swing.GroupLayout BotonMenuEmpleados3Layout = new javax.swing.GroupLayout(BotonMenuEmpleados3);
+        BotonMenuEmpleados3.setLayout(BotonMenuEmpleados3Layout);
+        BotonMenuEmpleados3Layout.setHorizontalGroup(
+            BotonMenuEmpleados3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuEmpleados3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel99, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(BotonMenuEmpleados3Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel100)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+        BotonMenuEmpleados3Layout.setVerticalGroup(
+            BotonMenuEmpleados3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonMenuEmpleados3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel100)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel99)
+                .addGap(50, 50, 50))
+        );
+
+        jPanel16.add(BotonMenuEmpleados3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 240, -1, 120));
+
+        panelMenuMaquinas.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
+
+        panelMenuPozo.setMaximumSize(new java.awt.Dimension(1000, 700));
+        panelMenuPozo.setMinimumSize(new java.awt.Dimension(1000, 700));
+        panelMenuPozo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton27.setBackground(new java.awt.Color(204, 204, 204));
+        jButton27.setText("Atras");
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton27ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(jButton27, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 600, 110, 30));
+
+        BotonEstadisticas.setBackground(new java.awt.Color(150, 187, 39));
+        BotonEstadisticas.setToolTipText("No implementado.");
+
+        jLabel50.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel50.setText("Estadisticas");
+
+        jLabel51.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel51.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel51.setText("de producto");
+
+        jLabel75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/estadistica.png"))); // NOI18N
+
+        javax.swing.GroupLayout BotonEstadisticasLayout = new javax.swing.GroupLayout(BotonEstadisticas);
+        BotonEstadisticas.setLayout(BotonEstadisticasLayout);
+        BotonEstadisticasLayout.setHorizontalGroup(
+            BotonEstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonEstadisticasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonEstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel51, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonEstadisticasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel75)
+                .addGap(39, 39, 39))
+        );
+        BotonEstadisticasLayout.setVerticalGroup(
+            BotonEstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonEstadisticasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jLabel50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel51)
+                .addGap(18, 18, 18))
+        );
+
+        jPanel13.add(BotonEstadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, -1, 140));
+
+        BotonModStock.setBackground(new java.awt.Color(150, 187, 39));
+        BotonModStock.setToolTipText("No implementado.");
+
+        jLabel53.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel53.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel53.setText("Modificar");
+
+        jLabel54.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel54.setText("stock");
+
+        jLabel76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/stock.png"))); // NOI18N
+
+        javax.swing.GroupLayout BotonModStockLayout = new javax.swing.GroupLayout(BotonModStock);
+        BotonModStock.setLayout(BotonModStockLayout);
+        BotonModStockLayout.setHorizontalGroup(
+            BotonModStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonModStockLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonModStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonModStockLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel76)
+                .addGap(57, 57, 57))
+        );
+        BotonModStockLayout.setVerticalGroup(
+            BotonModStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonModStockLayout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jLabel76)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel53)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel54)
+                .addGap(18, 18, 18))
+        );
+
+        jPanel13.add(BotonModStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, 140));
+
+        jButton28.setBackground(new java.awt.Color(255, 102, 51));
+        jButton28.setText("Salir");
+        jButton28.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton28MousePressed(evt);
+            }
+        });
+        jPanel13.add(jButton28, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
+
+        jLabel70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
+        jPanel13.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        BotonEgresoP.setBackground(new java.awt.Color(150, 187, 39));
+        BotonEgresoP.setToolTipText("No implementado.");
+
+        jLabel103.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel103.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel103.setText("Registrar");
+
+        jLabel104.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/ingreso.png"))); // NOI18N
+
+        jLabel102.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel102.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel102.setText("Egreso");
+
+        javax.swing.GroupLayout BotonEgresoPLayout = new javax.swing.GroupLayout(BotonEgresoP);
+        BotonEgresoP.setLayout(BotonEgresoPLayout);
+        BotonEgresoPLayout.setHorizontalGroup(
+            BotonEgresoPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonEgresoPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonEgresoPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel103, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(BotonEgresoPLayout.createSequentialGroup()
+                        .addComponent(jLabel102, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(BotonEgresoPLayout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jLabel104)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        BotonEgresoPLayout.setVerticalGroup(
+            BotonEgresoPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonEgresoPLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel104)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel103)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel102)
+                .addGap(12, 12, 12))
+        );
+
+        jPanel13.add(BotonEgresoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 170, -1));
+
+        BotonCantidadExtraida.setBackground(new java.awt.Color(150, 187, 39));
+        BotonCantidadExtraida.setToolTipText("Listado de información asociada a los comprobantes");
+        BotonCantidadExtraida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BotonCantidadExtraidaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BotonCantidadExtraidaMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BotonCantidadExtraidaMousePressed(evt);
+            }
+        });
+
+        jLabel105.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel105.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel105.setText("Ingreso de cantidad");
+
+        jLabel106.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel106.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel106.setText("extraida de pozo");
+
+        jLabel107.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/yacimiento.png"))); // NOI18N
+
+        javax.swing.GroupLayout BotonCantidadExtraidaLayout = new javax.swing.GroupLayout(BotonCantidadExtraida);
+        BotonCantidadExtraida.setLayout(BotonCantidadExtraidaLayout);
+        BotonCantidadExtraidaLayout.setHorizontalGroup(
+            BotonCantidadExtraidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonCantidadExtraidaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonCantidadExtraidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel106, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel105, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(BotonCantidadExtraidaLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel107)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        BotonCantidadExtraidaLayout.setVerticalGroup(
+            BotonCantidadExtraidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonCantidadExtraidaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel107)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel105)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel106)
+                .addGap(18, 18, 18))
+        );
+
+        jPanel13.add(BotonCantidadExtraida, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, -1, -1));
+
+        BotonListadoPozos.setBackground(new java.awt.Color(150, 187, 39));
+        BotonListadoPozos.setToolTipText("Listado de información asociada a los comprobantes");
+        BotonListadoPozos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BotonListadoPozosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BotonListadoPozosMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BotonListadoPozosMousePressed(evt);
+            }
+        });
+
+        jLabel112.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel112.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel112.setText("Listado de ");
+
+        jLabel113.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel113.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel113.setText("pozos");
+
+        jLabel114.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/listado.png"))); // NOI18N
+
+        javax.swing.GroupLayout BotonListadoPozosLayout = new javax.swing.GroupLayout(BotonListadoPozos);
+        BotonListadoPozos.setLayout(BotonListadoPozosLayout);
+        BotonListadoPozosLayout.setHorizontalGroup(
+            BotonListadoPozosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonListadoPozosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonListadoPozosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel113, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel112, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(BotonListadoPozosLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel114)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+        BotonListadoPozosLayout.setVerticalGroup(
+            BotonListadoPozosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonListadoPozosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel114)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel112)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel113)
+                .addGap(18, 18, 18))
+        );
+
+        jPanel13.add(BotonListadoPozos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
+
+        BotonIngresoP.setBackground(new java.awt.Color(150, 187, 39));
+        BotonIngresoP.setToolTipText("Listado de información asociada a los comprobantes");
+        BotonIngresoP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BotonIngresoPMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BotonIngresoPMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BotonIngresoPMousePressed(evt);
+            }
+        });
+
+        jLabel115.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel115.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel115.setText("Registrar");
+
+        jLabel116.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/egreso.png"))); // NOI18N
+
+        jLabel117.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel117.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel117.setText("Ingreso");
+
+        javax.swing.GroupLayout BotonIngresoPLayout = new javax.swing.GroupLayout(BotonIngresoP);
+        BotonIngresoP.setLayout(BotonIngresoPLayout);
+        BotonIngresoPLayout.setHorizontalGroup(
+            BotonIngresoPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonIngresoPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(BotonIngresoPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel115, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(BotonIngresoPLayout.createSequentialGroup()
+                        .addComponent(jLabel117, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonIngresoPLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel116)
+                .addGap(58, 58, 58))
+        );
+        BotonIngresoPLayout.setVerticalGroup(
+            BotonIngresoPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BotonIngresoPLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel116)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel115)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel117)
+                .addGap(12, 12, 12))
+        );
+
+        jPanel13.add(BotonIngresoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, 170, -1));
+
+        panelMenuPozo.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
+
+        jPanel14.setBackground(new java.awt.Color(29, 59, 115));
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel82.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel82.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel82.setText("MENU POZO");
+        jPanel14.add(jLabel82, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, -1, -1));
+
+        jLabel72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/minimizar.png"))); // NOI18N
+        jPanel14.add(jLabel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
+
+        jLabel71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/maximizar.png"))); // NOI18N
+        jPanel14.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
+
+        jLabel73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cerrar.png"))); // NOI18N
+        jPanel14.add(jLabel73, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
+
+        panelMenuPozo.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
+
+        panelListadoMaquinaria.setMaximumSize(new java.awt.Dimension(1000, 700));
+        panelListadoMaquinaria.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel17.setBackground(new java.awt.Color(29, 59, 115));
+        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel90.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel90.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel90.setText("LISTADO MAQUINARIA");
+        jPanel17.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+
+        jLabel93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cerrar.png"))); // NOI18N
+        jPanel17.add(jLabel93, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, -1, -1));
+
+        jLabel97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/minimizar.png"))); // NOI18N
+        jPanel17.add(jLabel97, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, -1, -1));
+
+        jLabel98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/maximizar.png"))); // NOI18N
+        jPanel17.add(jLabel98, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
+
+        panelListadoMaquinaria.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
+
+        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        botonAtrasLM.setBackground(new java.awt.Color(204, 204, 204));
+        botonAtrasLM.setText("Atrás");
+        botonAtrasLM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonAtrasLMMousePressed(evt);
+            }
+        });
+        jPanel18.add(botonAtrasLM, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, 110, 30));
+
+        jScrollPane3.setRequestFocusEnabled(false);
+        jScrollPane3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane3MouseClicked(evt);
+            }
+        });
+
+        tablaListadoMaquinaria.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre", "Estado", "ID"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaListadoMaquinaria.setFocusable(false);
+        tablaListadoMaquinaria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaListadoMaquinariaMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tablaListadoMaquinaria);
+        if (tablaListadoMaquinaria.getColumnModel().getColumnCount() > 0) {
+            tablaListadoMaquinaria.getColumnModel().getColumn(0).setResizable(false);
+            tablaListadoMaquinaria.getColumnModel().getColumn(0).setHeaderValue("ID");
+            tablaListadoMaquinaria.getColumnModel().getColumn(1).setResizable(false);
+            tablaListadoMaquinaria.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jPanel18.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 800, 360));
+
+        botonSalirLM.setBackground(new java.awt.Color(255, 102, 51));
+        botonSalirLM.setText("Salir");
+        botonSalirLM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonSalirLMMousePressed(evt);
+            }
+        });
+        jPanel18.add(botonSalirLM, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
+
+        jLabel101.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
+        jPanel18.add(jLabel101, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabel19.setText("Nombre yacimiento:");
+        jPanel18.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
+
+        campoNombreYac.setEditable(false);
+        jPanel18.add(campoNombreYac, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 150, -1));
+
+        panelListadoMaquinaria.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
 
         panelListadoPozo.setMaximumSize(new java.awt.Dimension(1000, 700));
         panelListadoPozo.setMinimumSize(new java.awt.Dimension(1000, 700));
@@ -1292,24 +1940,6 @@ public class TSBVentana extends javax.swing.JFrame {
         });
         jPanel12.add(listadoPozoAtrasButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, 110, 30));
 
-        listadoPozoDELETEButton.setBackground(new java.awt.Color(150, 187, 39));
-        listadoPozoDELETEButton.setText("Eliminar Pozo");
-        listadoPozoDELETEButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listadoPozoDELETEButtonMouseClicked(evt);
-            }
-        });
-        jPanel12.add(listadoPozoDELETEButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 140, 40));
-
-        listadoPozoMODIFYButton.setBackground(new java.awt.Color(150, 187, 39));
-        listadoPozoMODIFYButton.setText("Modificar Pozo");
-        listadoPozoMODIFYButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listadoPozoMODIFYButtonMouseClicked(evt);
-            }
-        });
-        jPanel12.add(listadoPozoMODIFYButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 200, 140, 40));
-
         pozosDeYacimientosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -1321,13 +1951,17 @@ public class TSBVentana extends javax.swing.JFrame {
                 "ID Pozo", "Cantidad Extraida", "Estado"
             }
         ));
-        pozosDeYacimientosTable.setShowHorizontalLines(true);
         jScrollPane2.setViewportView(pozosDeYacimientosTable);
 
         jPanel12.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 630, 470));
 
-        botonSalirLP.setBackground(new java.awt.Color(204, 204, 204));
+        botonSalirLP.setBackground(new java.awt.Color(255, 102, 51));
         botonSalirLP.setText("Salir");
+        botonSalirLP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonSalirLPMousePressed(evt);
+            }
+        });
         botonSalirLP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirLPActionPerformed(evt);
@@ -1338,19 +1972,89 @@ public class TSBVentana extends javax.swing.JFrame {
         jLabel62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
         jPanel12.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        botonEliminarPozo.setBackground(new java.awt.Color(150, 187, 39));
+        botonEliminarPozo.setToolTipText("No implementado.");
+
+        jLabel121.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel121.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel121.setText("Eliminar Pozo");
+
+        jLabel125.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/eliminar.png"))); // NOI18N
+
+        javax.swing.GroupLayout botonEliminarPozoLayout = new javax.swing.GroupLayout(botonEliminarPozo);
+        botonEliminarPozo.setLayout(botonEliminarPozoLayout);
+        botonEliminarPozoLayout.setHorizontalGroup(
+            botonEliminarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonEliminarPozoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel121, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(botonEliminarPozoLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel125)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        botonEliminarPozoLayout.setVerticalGroup(
+            botonEliminarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonEliminarPozoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel125)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel121)
+                .addGap(19, 19, 19))
+        );
+
+        jPanel12.add(botonEliminarPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 150, 160, 120));
+
+        botonModificarPozo.setBackground(new java.awt.Color(150, 187, 39));
+        botonModificarPozo.setToolTipText("No implementado.");
+        botonModificarPozo.setMaximumSize(new java.awt.Dimension(116, 150));
+        botonModificarPozo.setMinimumSize(new java.awt.Dimension(116, 150));
+
+        jLabel126.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel126.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel126.setText("Modificar Pozo");
+
+        jLabel127.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/modificar.png"))); // NOI18N
+
+        javax.swing.GroupLayout botonModificarPozoLayout = new javax.swing.GroupLayout(botonModificarPozo);
+        botonModificarPozo.setLayout(botonModificarPozoLayout);
+        botonModificarPozoLayout.setHorizontalGroup(
+            botonModificarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonModificarPozoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel126, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(botonModificarPozoLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel127)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        botonModificarPozoLayout.setVerticalGroup(
+            botonModificarPozoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botonModificarPozoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel127)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel126)
+                .addGap(50, 50, 50))
+        );
+
+        jPanel12.add(botonModificarPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, 160, 120));
+
         panelListadoPozo.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
 
         panelAgregarPozo.setMaximumSize(new java.awt.Dimension(1000, 700));
         panelAgregarPozo.setMinimumSize(new java.awt.Dimension(1000, 700));
         panelAgregarPozo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelAzulingresoPozo.setBackground(new java.awt.Color(29, 59, 115));
-        panelAzulingresoPozo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel23.setBackground(new java.awt.Color(29, 59, 115));
+        jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel81.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel81.setForeground(new java.awt.Color(255, 255, 255));
         jLabel81.setText("INGRESO DE POZO");
-        panelAzulingresoPozo.add(jLabel81, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+        jPanel23.add(jLabel81, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
 
         minimizarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/minimizar.png"))); // NOI18N
         minimizarButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1358,10 +2062,10 @@ public class TSBVentana extends javax.swing.JFrame {
                 minimizarButtonMouseClicked(evt);
             }
         });
-        panelAzulingresoPozo.add(minimizarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
+        jPanel23.add(minimizarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
 
         jLabel69.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cerrar.png"))); // NOI18N
-        panelAzulingresoPozo.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
+        jPanel23.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
 
         expandirButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/maximizar.png"))); // NOI18N
         expandirButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1369,12 +2073,12 @@ public class TSBVentana extends javax.swing.JFrame {
                 expandirButtonMouseClicked(evt);
             }
         });
-        panelAzulingresoPozo.add(expandirButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
+        jPanel23.add(expandirButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
-        panelAgregarPozo.add(panelAzulingresoPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
+        panelAgregarPozo.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
 
-        panelContenidoIngresoPozo.setBackground(new java.awt.Color(255, 255, 255));
-        panelContenidoIngresoPozo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel24.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel24.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         botonAtrasIP.setBackground(new java.awt.Color(204, 204, 204));
         botonAtrasIP.setText("Atras");
@@ -1383,40 +2087,50 @@ public class TSBVentana extends javax.swing.JFrame {
                 botonAtrasIPActionPerformed(evt);
             }
         });
-        panelContenidoIngresoPozo.add(botonAtrasIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, 110, 30));
+        jPanel24.add(botonAtrasIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, 110, 30));
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Nombre Yacimiento:");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        panelContenidoIngresoPozo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 140, 50));
+        jPanel24.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 140, 50));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Estado:");
         jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        panelContenidoIngresoPozo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 100, 50));
+        jPanel24.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 100, 50));
 
         equipoPozo.setToolTipText("");
-        panelContenidoIngresoPozo.add(equipoPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 270, 30));
+        equipoPozo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                equipoPozoKeyTyped(evt);
+            }
+        });
+        jPanel24.add(equipoPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 270, 30));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Identificador Pozo:");
+        jLabel12.setText("Equipo (id pozo)");
         jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        panelContenidoIngresoPozo.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 130, 50));
+        jPanel24.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 130, 50));
 
         estadoPozo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
-        panelContenidoIngresoPozo.add(estadoPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 270, 30));
+        jPanel24.add(estadoPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 270, 30));
 
-        botonCancelarIP.setBackground(new java.awt.Color(204, 204, 204));
-        botonCancelarIP.setText("Cancelar");
+        botonCancelarIP.setBackground(new java.awt.Color(255, 102, 51));
+        botonCancelarIP.setText("Salir");
         botonCancelarIP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 botonCancelarIPMousePressed(evt);
             }
         });
-        panelContenidoIngresoPozo.add(botonCancelarIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
+        botonCancelarIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarIPActionPerformed(evt);
+            }
+        });
+        jPanel24.add(botonCancelarIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
 
         ingresarPozoButton.setBackground(new java.awt.Color(150, 187, 39));
         ingresarPozoButton.setText("Ingresar Pozo");
@@ -1425,222 +2139,413 @@ public class TSBVentana extends javax.swing.JFrame {
                 ingresarPozoButtonMouseClicked(evt);
             }
         });
-        panelContenidoIngresoPozo.add(ingresarPozoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 170, 30));
+        jPanel24.add(ingresarPozoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 170, 30));
 
-        yacimientoDePozo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yacimientoDePozoActionPerformed(evt);
-            }
-        });
-        panelContenidoIngresoPozo.add(yacimientoDePozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 270, 30));
+        jPanel24.add(yacimientoDePozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 270, 30));
 
         jLabel66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
-        panelContenidoIngresoPozo.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel24.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        panelAgregarPozo.add(panelContenidoIngresoPozo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
+        panelAgregarPozo.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
 
-        panelMenuPozo.setMaximumSize(new java.awt.Dimension(1000, 700));
-        panelMenuPozo.setMinimumSize(new java.awt.Dimension(1000, 700));
-        panelMenuPozo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRegistrarIngreso.setMaximumSize(new java.awt.Dimension(1000, 700));
+        panelRegistrarIngreso.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel19.setBackground(new java.awt.Color(29, 59, 115));
+        jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton27.setBackground(new java.awt.Color(204, 204, 204));
-        jButton27.setText("Atras");
-        jButton27.addActionListener(new java.awt.event.ActionListener() {
+        jLabel108.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel108.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel108.setText("REGISTRO DE INGRESO");
+        jPanel19.add(jLabel108, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+
+        jLabel74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cerrar.png"))); // NOI18N
+        jPanel19.add(jLabel74, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, -1, -1));
+
+        jLabel109.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/minimizar.png"))); // NOI18N
+        jPanel19.add(jLabel109, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, -1, -1));
+
+        jLabel110.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/maximizar.png"))); // NOI18N
+        jPanel19.add(jLabel110, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
+
+        panelRegistrarIngreso.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
+
+        jPanel20.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        botonAtrasMM1.setBackground(new java.awt.Color(204, 204, 204));
+        botonAtrasMM1.setText("Atrás");
+        botonAtrasMM1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonAtrasMM1MousePressed(evt);
+            }
+        });
+        jPanel20.add(botonAtrasMM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, 110, 30));
+
+        botonSalirMM1.setBackground(new java.awt.Color(255, 102, 51));
+        botonSalirMM1.setText("Salir");
+        botonSalirMM1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonSalirMM1MousePressed(evt);
+            }
+        });
+        botonSalirMM1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton27ActionPerformed(evt);
+                botonSalirMM1ActionPerformed(evt);
             }
         });
-        jPanel13.add(jButton27, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 600, 110, 30));
+        jPanel20.add(botonSalirMM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
 
-        BotonListadoFacturas9.setBackground(new java.awt.Color(150, 187, 39));
-        BotonListadoFacturas9.setToolTipText("Listado de información asociada a los comprobantes");
-        BotonListadoFacturas9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotonListadoFacturas9MouseEntered(evt);
+        jLabel111.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
+        jPanel20.add(jLabel111, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabel34.setText("Pozo:");
+        jPanel20.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+
+        jLabel47.setText("Yacimiento:");
+        jPanel20.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, -1, -1));
+
+        campoNombreYacimientoTrae.setEditable(false);
+        campoNombreYacimientoTrae.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNombreYacimientoTraeActionPerformed(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotonListadoFacturas9MouseExited(evt);
+        });
+        jPanel20.add(campoNombreYacimientoTrae, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 180, -1));
+
+        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/busqueda.png"))); // NOI18N
+        jLabel48.setText("Interno Chofer: ");
+        jPanel20.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+
+        jLabel118.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/busqueda.png"))); // NOI18N
+        jLabel118.setText("ID Camión:");
+        jPanel20.add(jLabel118, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));
+
+        BotonRegistroIngreso.setBackground(new java.awt.Color(150, 187, 39));
+        BotonRegistroIngreso.setText("Registrar ingreso");
+        BotonRegistroIngreso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BotonRegistroIngresoMousePressed(evt);
+            }
+        });
+        jPanel20.add(BotonRegistroIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 490, 170, 30));
+
+        campoBusquedaCamion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoBusquedaCamionActionPerformed(evt);
+            }
+        });
+        campoBusquedaCamion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoBusquedaCamionKeyTyped(evt);
+            }
+        });
+        jPanel20.add(campoBusquedaCamion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 270, -1));
+
+        campoBusquedaChofer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoBusquedaChoferKeyTyped(evt);
+            }
+        });
+        jPanel20.add(campoBusquedaChofer, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 270, -1));
+
+        comboListadoPozosxYac.setMaximumRowCount(1000);
+        comboListadoPozosxYac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboListadoPozosxYacActionPerformed(evt);
+            }
+        });
+        jPanel20.add(comboListadoPozosxYac, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 180, -1));
+
+        jLabel25.setText("Fecha de ingreso: ");
+        jPanel20.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, -1));
+
+        jLabel129.setText("Datos Camion");
+        jPanel20.add(jLabel129, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 310, -1, -1));
+
+        campoTelefonoChofer.setEditable(false);
+        jPanel20.add(campoTelefonoChofer, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 260, -1));
+
+        campoDniChofer.setEditable(false);
+        jPanel20.add(campoDniChofer, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 260, -1));
+
+        campoNombreChofer.setEditable(false);
+        jPanel20.add(campoNombreChofer, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 260, -1));
+
+        campoApellidoChofer.setEditable(false);
+        jPanel20.add(campoApellidoChofer, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 450, 260, -1));
+
+        jLabel130.setText("Datos Chofer");
+        jPanel20.add(jLabel130, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
+
+        campoTipoCamion.setEditable(false);
+        jPanel20.add(campoTipoCamion, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 350, 260, -1));
+
+        campoTipoMercancia.setEditable(false);
+        jPanel20.add(campoTipoMercancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 400, 260, -1));
+
+        botonBuscarChofCam.setBackground(new java.awt.Color(150, 187, 39));
+        botonBuscarChofCam.setText("Buscar");
+        botonBuscarChofCam.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonBuscarChofCamMousePressed(evt);
+            }
+        });
+        botonBuscarChofCam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarChofCamActionPerformed(evt);
+            }
+        });
+        jPanel20.add(botonBuscarChofCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, 140, -1));
+
+        jLabel131.setText("Telefono:");
+        jPanel20.add(jLabel131, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, -1, -1));
+
+        jLabel132.setText("DNI:");
+        jPanel20.add(jLabel132, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
+
+        jLabel133.setText("Nombre:");
+        jPanel20.add(jLabel133, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, -1, -1));
+
+        jLabel134.setText("Apellido:");
+        jPanel20.add(jLabel134, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, -1, -1));
+
+        jPanel25.setBackground(new java.awt.Color(150, 187, 39));
+
+        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
+        jPanel25.setLayout(jPanel25Layout);
+        jPanel25Layout.setHorizontalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel25Layout.setVerticalGroup(
+            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel20.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 280, 20));
+
+        jPanel26.setBackground(new java.awt.Color(150, 187, 39));
+
+        javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
+        jPanel26.setLayout(jPanel26Layout);
+        jPanel26Layout.setHorizontalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel26Layout.setVerticalGroup(
+            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel20.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, -1, -1));
+
+        jLabel135.setText("Tipo:");
+        jPanel20.add(jLabel135, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, -1, -1));
+
+        jLabel136.setText("Mercancia:");
+        jPanel20.add(jLabel136, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, -1, -1));
+        jPanel20.add(fechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, -1, -1));
+
+        panelRegistrarIngreso.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
+
+        panelAgregarCantidadExtraida.setMaximumSize(new java.awt.Dimension(1000, 700));
+        panelAgregarCantidadExtraida.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel21.setBackground(new java.awt.Color(29, 59, 115));
+        jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel119.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel119.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel119.setText("INGRESO DE CANTIDAD EXTRAIDA");
+        jPanel21.add(jLabel119, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
+
+        minimizarButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/minimizar.png"))); // NOI18N
+        minimizarButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                minimizarButton1MouseClicked(evt);
+            }
+        });
+        jPanel21.add(minimizarButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
+
+        jLabel120.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cerrar.png"))); // NOI18N
+        jPanel21.add(jLabel120, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
+
+        expandirButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/maximizar.png"))); // NOI18N
+        expandirButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                expandirButton1MouseClicked(evt);
+            }
+        });
+        jPanel21.add(expandirButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
+
+        panelAgregarCantidadExtraida.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
+
+        jPanel22.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        botonAtrasIP1.setBackground(new java.awt.Color(204, 204, 204));
+        botonAtrasIP1.setText("Atras");
+        botonAtrasIP1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonAtrasIP1MousePressed(evt);
+            }
+        });
+        botonAtrasIP1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAtrasIP1ActionPerformed(evt);
+            }
+        });
+        jPanel22.add(botonAtrasIP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 590, 110, 30));
+
+        jLabel31.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel31.setText("Nombre Pozo:");
+        jLabel31.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel22.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 140, 50));
+
+        campoNombreYacICE.setEditable(false);
+        campoNombreYacICE.setToolTipText("");
+        jPanel22.add(campoNombreYacICE, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 270, 30));
+
+        jLabel122.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel122.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel122.setText("Nombre Yacimiento:");
+        jLabel122.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel22.add(jLabel122, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 130, 50));
+
+        botonCancelarIP1.setBackground(new java.awt.Color(255, 102, 51));
+        botonCancelarIP1.setText("Salir");
+        botonCancelarIP1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                botonCancelarIP1MousePressed(evt);
+            }
+        });
+        jPanel22.add(botonCancelarIP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
+
+        botonIngresarCantidad.setBackground(new java.awt.Color(150, 187, 39));
+        botonIngresarCantidad.setText("Ingresar Cantidad");
+        botonIngresarCantidad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonIngresarCantidadMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                BotonListadoFacturas9MousePressed(evt);
+                botonIngresarCantidadMousePressed(evt);
             }
         });
+        jPanel22.add(botonIngresarCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 170, 30));
 
-        jLabel47.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel47.setText("Listado");
+        jPanel22.add(nombrePozoICE, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 270, 30));
 
-        jLabel48.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel48.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel48.setText("pozos");
+        jLabel123.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
+        jPanel22.add(jLabel123, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jLabel74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/listado.png"))); // NOI18N
+        jLabel124.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel124.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel124.setText("Cantidad Extraida:");
+        jLabel124.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel22.add(jLabel124, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 130, 50));
 
-        javax.swing.GroupLayout BotonListadoFacturas9Layout = new javax.swing.GroupLayout(BotonListadoFacturas9);
-        BotonListadoFacturas9.setLayout(BotonListadoFacturas9Layout);
-        BotonListadoFacturas9Layout.setHorizontalGroup(
-            BotonListadoFacturas9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonListadoFacturas9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(BotonListadoFacturas9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(BotonListadoFacturas9Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel74)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        BotonListadoFacturas9Layout.setVerticalGroup(
-            BotonListadoFacturas9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonListadoFacturas9Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jLabel74)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel47)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel48)
-                .addGap(18, 18, 18))
-        );
-
-        jPanel13.add(BotonListadoFacturas9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 160, 140));
-
-        BotonListadoFacturas10.setBackground(new java.awt.Color(150, 187, 39));
-        BotonListadoFacturas10.setToolTipText("Listado de información asociada a los comprobantes");
-        BotonListadoFacturas10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotonListadoFacturas10MouseEntered(evt);
+        campoCantidadExtraidaICE.setToolTipText("");
+        campoCantidadExtraidaICE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoCantidadExtraidaICEKeyTyped(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotonListadoFacturas10MouseExited(evt);
-            }
+        });
+        jPanel22.add(campoCantidadExtraidaICE, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 270, 30));
+
+        panelAgregarCantidadExtraida.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
+
+        panelListadoCamiones.setMaximumSize(new java.awt.Dimension(1000, 700));
+        panelListadoCamiones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel27.setBackground(new java.awt.Color(29, 59, 115));
+        jPanel27.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel137.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel137.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel137.setText("LISTADO CAMIONES");
+        jPanel27.add(jLabel137, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+
+        jLabel138.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cerrar.png"))); // NOI18N
+        jPanel27.add(jLabel138, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, -1, -1));
+
+        jLabel139.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/minimizar.png"))); // NOI18N
+        jPanel27.add(jLabel139, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, -1, -1));
+
+        jLabel140.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/maximizar.png"))); // NOI18N
+        jPanel27.add(jLabel140, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, -1, -1));
+
+        panelListadoCamiones.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
+
+        jPanel28.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel28.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        botonAtrasLM1.setBackground(new java.awt.Color(204, 204, 204));
+        botonAtrasLM1.setText("Atrás");
+        botonAtrasLM1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                BotonListadoFacturas10MousePressed(evt);
+                botonAtrasLM1MousePressed(evt);
+            }
+        });
+        jPanel28.add(botonAtrasLM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, 110, 30));
+
+        jScrollPane4.setRequestFocusEnabled(false);
+        jScrollPane4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane4MouseClicked(evt);
             }
         });
 
-        jLabel50.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel50.setText("Estadisticas");
-
-        jLabel51.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel51.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel51.setText("de producto");
-
-        jLabel75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/estadistica.png"))); // NOI18N
-
-        javax.swing.GroupLayout BotonListadoFacturas10Layout = new javax.swing.GroupLayout(BotonListadoFacturas10);
-        BotonListadoFacturas10.setLayout(BotonListadoFacturas10Layout);
-        BotonListadoFacturas10Layout.setHorizontalGroup(
-            BotonListadoFacturas10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonListadoFacturas10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(BotonListadoFacturas10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel51, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                    .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonListadoFacturas10Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel75)
-                .addGap(33, 33, 33))
-        );
-        BotonListadoFacturas10Layout.setVerticalGroup(
-            BotonListadoFacturas10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonListadoFacturas10Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(jLabel75)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel50)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel51)
-                .addGap(18, 18, 18))
-        );
-
-        jPanel13.add(BotonListadoFacturas10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, -1, -1));
-
-        BotonListadoFacturas11.setBackground(new java.awt.Color(150, 187, 39));
-        BotonListadoFacturas11.setToolTipText("Listado de información asociada a los comprobantes");
-        BotonListadoFacturas11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotonListadoFacturas11MouseEntered(evt);
+        tablaListadoMaquinaria1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Mercancía", "Tipo", "Horas funcionando", "Fecha inicio servicio", "Fecha fin servicio"
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotonListadoFacturas11MouseExited(evt);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
+        });
+        tablaListadoMaquinaria1.setFocusable(false);
+        tablaListadoMaquinaria1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaListadoMaquinaria1MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tablaListadoMaquinaria1);
+        if (tablaListadoMaquinaria1.getColumnModel().getColumnCount() > 0) {
+            tablaListadoMaquinaria1.getColumnModel().getColumn(0).setResizable(false);
+            tablaListadoMaquinaria1.getColumnModel().getColumn(1).setResizable(false);
+            tablaListadoMaquinaria1.getColumnModel().getColumn(2).setResizable(false);
+            tablaListadoMaquinaria1.getColumnModel().getColumn(3).setResizable(false);
+            tablaListadoMaquinaria1.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        jPanel28.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 800, 360));
+
+        botonSalirLM1.setBackground(new java.awt.Color(255, 102, 51));
+        botonSalirLM1.setText("Salir");
+        botonSalirLM1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                BotonListadoFacturas11MousePressed(evt);
+                botonSalirLM1MousePressed(evt);
             }
         });
+        jPanel28.add(botonSalirLM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
 
-        jLabel53.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel53.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel53.setText("Modificar");
+        jLabel141.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
+        jPanel28.add(jLabel141, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jLabel54.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel54.setText("stock");
-
-        jLabel76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/stock.png"))); // NOI18N
-
-        javax.swing.GroupLayout BotonListadoFacturas11Layout = new javax.swing.GroupLayout(BotonListadoFacturas11);
-        BotonListadoFacturas11.setLayout(BotonListadoFacturas11Layout);
-        BotonListadoFacturas11Layout.setHorizontalGroup(
-            BotonListadoFacturas11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonListadoFacturas11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(BotonListadoFacturas11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(BotonListadoFacturas11Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jLabel76)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        BotonListadoFacturas11Layout.setVerticalGroup(
-            BotonListadoFacturas11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotonListadoFacturas11Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jLabel76)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel53)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel54)
-                .addGap(18, 18, 18))
-        );
-
-        jPanel13.add(BotonListadoFacturas11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, -1, 140));
-
-        jButton28.setBackground(new java.awt.Color(204, 204, 204));
-        jButton28.setText("Salir");
-        jPanel13.add(jButton28, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 593, 110, 30));
-
-        jLabel70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/tsblogo.png"))); // NOI18N
-        jPanel13.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        panelMenuPozo.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
-
-        jPanel14.setBackground(new java.awt.Color(29, 59, 115));
-        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel82.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabel82.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel82.setText("MENU POZO");
-        jPanel14.add(jLabel82, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, -1, -1));
-
-        jLabel72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/minimizar.png"))); // NOI18N
-        jPanel14.add(jLabel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
-
-        jLabel71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/maximizar.png"))); // NOI18N
-        jPanel14.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
-
-        jLabel73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myPaquete/Imagenes/cerrar.png"))); // NOI18N
-        jPanel14.add(jLabel73, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
-
-        panelMenuPozo.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 40));
+        panelListadoCamiones.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1000, 660));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1653,54 +2558,111 @@ public class TSBVentana extends javax.swing.JFrame {
             .addComponent(panelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(panelAgregarYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(panelListadoYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(panelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelMenuMaquinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelListadoMaquinaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(10, Short.MAX_VALUE)
+                    .addComponent(panelRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(2, 2, 2)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelAgregarCantidadExtraida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelListadoCamiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelMenuPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelMenuYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelListadoPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelAgregarPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelAgregarYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelListadoYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panelMenuPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelMenuYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelListadoPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelAgregarPozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelAgregarYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelListadoYacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(panelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(9, Short.MAX_VALUE)
+                    .addComponent(panelMenuMaquinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(3, 3, 3)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(9, Short.MAX_VALUE)
+                    .addComponent(panelListadoMaquinaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(3, 3, 3)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelRegistrarIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelAgregarCantidadExtraida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelListadoCamiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    //metodos efectos de botones
+
+    public void setColor(JPanel panel) {
+        panel.setBackground(new java.awt.Color(109, 173, 8));
+    }
+
+    public void resetColor(JPanel panel) {
+        panel.setBackground(new java.awt.Color(158, 213, 71));
+    }
+
+    private void clean() {
+        CampoUsuario.setText("");
+        CampoPass.setText("");
+    }
 
     //metodo agregar pozo
     private void ingresarPozoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarPozoButtonMouseClicked
-        // TODO add your handling code here:
 
         Pozo pozito = new Pozo();
         int estado = 0; //1=activo, 0=inactivo
 
         if (equipoPozo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Debe ingresar todos los datos primero!!!");
-        }
-        if (estadoPozo.getSelectedItem().equals("Activo")) {
-            estado = 1;
+            JOptionPane.showMessageDialog(rootPane, "Debe ingresar todos los datos.");
         } else {
-            estado = 0;
+            if (estadoPozo.getSelectedItem().equals("Activo")) {
+                estado = 1;
+            } else {
+                estado = 0;
+            }
+            pozito = mp.ingresoDatos(0, equipoPozo.getText().toUpperCase(), estado, (String) yacimientoDePozo.getSelectedItem());
+            mp.pasoDatos(pozito);
+            panelAgregarPozo.setVisible(false);
+            panelMenuYacimiento.setVisible(true);
+
         }
-
-        pozito = mp.ingresoDatos(0, equipoPozo.getText(), estado, (String) yacimientoDePozo.getSelectedItem());
-
-        pd.create(pozito);
-        panelAgregarPozo.setVisible(false);
-        panelMenuYacimiento.setVisible(true);
+        equipoPozo.setText("");
+        estadoPozo.setSelectedItem("Activo");
+        yacimientoDePozo.setSelectedItem("");
     }//GEN-LAST:event_ingresarPozoButtonMouseClicked
-
-    private void yacimientoDePozoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yacimientoDePozoActionPerformed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_yacimientoDePozoActionPerformed
 
     private void jLabel94MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel94MouseClicked
         // TODO add your handling code here:
@@ -1710,12 +2672,12 @@ public class TSBVentana extends javax.swing.JFrame {
     public void cargarPozosEnTabla() {
         DefaultTableModel model = (DefaultTableModel) this.pozosDeYacimientosTable.getModel();
         model = (DefaultTableModel) this.pozosDeYacimientosTable.getModel();
-        
+
         // deleteall before
         model.getDataVector().removeAllElements();
         model.fireTableDataChanged();
 
-        Set listaPozoBD = pd.getPozosDeYac(nombYac);
+        Set listaPozoBD = mp.obtengoListaYac(nombYac);
 
         Object[] fila;
         Iterator<Pozo> it = listaPozoBD.iterator();
@@ -1738,78 +2700,37 @@ public class TSBVentana extends javax.swing.JFrame {
             model.addRow(fila);
         }
     }
+// carga los pozos de X yacimiento en combo BOX
 
-    private void pozosDeYacimientoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pozosDeYacimientoButtonMouseClicked
-        // TODO add your handling code here:
-        panelListadoPozo.setVisible(true);
-        panelListadoYacimiento.setVisible(false);
-        cargarPozosEnTabla();
-    }//GEN-LAST:event_pozosDeYacimientoButtonMouseClicked
+    public void cargarPozosEnCombo() {
 
+        Set listaPozoBD = mp.obtengoListaYac(nombYac);
+
+        Iterator<Pozo> it = listaPozoBD.iterator();
+        comboListadoPozosxYac.removeAllItems();
+        while (it.hasNext()) {
+            String newEstado = "";
+            Pozo element = it.next();
+            // pregunto si el pozo esta activo y le asigno ese estado a newEstado
+            if (element.getEstado() == 1) {
+                newEstado = "Activo";
+                comboListadoPozosxYac.addItem(element.getEquipo());  //este seria el ID Pozo
+            } else {
+                newEstado = "Inactivo";
+            }
+        }
+    }
     private void botonAtrasIngYacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAtrasIngYacMouseClicked
         // TODO add your handling code here:
         panelAgregarYacimiento.setVisible(false);
         panelMenuYacimiento.setVisible(true);
     }//GEN-LAST:event_botonAtrasIngYacMouseClicked
 
-    private void BotonMenuYacimientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuYacimientoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BotonMenuYacimientoMouseClicked
-
-    private void BotonAgregarPozoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarPozoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BotonAgregarPozoMouseClicked
-
     private void listadoPozoAtrasButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listadoPozoAtrasButtonMouseClicked
         // TODO add your handling code here:
         panelListadoPozo.setVisible(false);
-        panelListadoYacimiento.setVisible(true);
+        panelMenuPozo.setVisible(true);
     }//GEN-LAST:event_listadoPozoAtrasButtonMouseClicked
-
-    private void listadoPozoDELETEButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listadoPozoDELETEButtonMouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Ups!!! Aun no esta implementada esta funcion. \nLo sentimos!");
-    }//GEN-LAST:event_listadoPozoDELETEButtonMouseClicked
-
-    private void listadoPozoMODIFYButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listadoPozoMODIFYButtonMouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Ups!!! Aun no esta implementada esta funcion. \nLo sentimos!");
-    }//GEN-LAST:event_listadoPozoMODIFYButtonMouseClicked
-
-    private void BotonMenuEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuEmpleadosMouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Ups!!! Aun no esta implementada esta funcion. \nLo sentimos!");
-    }//GEN-LAST:event_BotonMenuEmpleadosMouseClicked
-
-    private void BotonMenuClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuClientesMouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Ups!!! Aun no esta implementada esta funcion. \nLo sentimos!");
-    }//GEN-LAST:event_BotonMenuClientesMouseClicked
-
-    private void BotonMenuMaquinasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuMaquinasMouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Ups!!! Aun no esta implementada esta funcion. \nLo sentimos!");
-    }//GEN-LAST:event_BotonMenuMaquinasMouseClicked
-
-    private void BotonMenuContratosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuContratosMouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Ups!!! Aun no esta implementada esta funcion. \nLo sentimos!");
-    }//GEN-LAST:event_BotonMenuContratosMouseClicked
-
-    private void BotonMenuCamionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuCamionesMouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Ups!!! Aun no esta implementada esta funcion. \nLo sentimos!");
-    }//GEN-LAST:event_BotonMenuCamionesMouseClicked
-
-    private void BotonMenuYacimiento1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuYacimiento1MouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Ups!!! Aun no esta implementada esta funcion. \nLo sentimos!");
-    }//GEN-LAST:event_BotonMenuYacimiento1MouseClicked
-
-    private void BotonMenuEmpleados1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuEmpleados1MouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Ups!!! Aun no esta implementada esta funcion. \nLo sentimos!");
-    }//GEN-LAST:event_BotonMenuEmpleados1MouseClicked
 
     private void expandirButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expandirButtonMouseClicked
         // TODO add your handling code here:
@@ -1822,8 +2743,9 @@ public class TSBVentana extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizarButtonMouseClicked
 
     private void botonSalirMenuPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMenuPMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
+        panelMenuPrincipal.setVisible(false);
+        panelInicio.setVisible(true);
+        clean();
     }//GEN-LAST:event_botonSalirMenuPMouseClicked
 
     private void mazimizar0ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mazimizar0ButtonMouseClicked
@@ -1856,23 +2778,497 @@ public class TSBVentana extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Ups!!! No tenemos idea como hacerlo, AUN!");
     }//GEN-LAST:event_maximizar00ButtonMouseClicked
 
-    private void CampoPassKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoPassKeyPressed
-        /*
-         * if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-         * inicioDeSesion();
-         * }
-         */
-    }// GEN-LAST:event_CampoPassKeyPressed
+    private void botonAtrasMMMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAtrasMMMousePressed
+        // Debe volver al listar yacimiento
+        panelMenuMaquinas.setVisible(false);
+        panelListadoYacimiento.setVisible(true);
+    }//GEN-LAST:event_botonAtrasMMMousePressed
 
-    private void CampoPassKeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoPassKeyTyped
-        /*
-         * char validar = evt.getKeyChar();
-         * if (!Character.isDigit(validar)) {
-         * evt.consume();//Cancelo el ingreso de la tecla
-         * }
-         */
-    }// GEN-LAST:event_CampoPassKeyTyped
+    private void botonSalirMMMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMMMousePressed
+        panelMenuMaquinas.setVisible(false);
+        panelInicio.setVisible(true);
+        clean();
+    }//GEN-LAST:event_botonSalirMMMousePressed
 
+    private void tablaListadoMaquinariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaListadoMaquinariaMouseClicked
+        // TODO add your handling code here:
+        //-----------------------------------------------------------------------BORRAR
+    }//GEN-LAST:event_tablaListadoMaquinariaMouseClicked
+
+    private void jScrollPane3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane3MouseClicked
+        // TODO add your handling code here:
+        //-----------------------------------------------------------------------BORRAR
+    }//GEN-LAST:event_jScrollPane3MouseClicked
+
+    private void BotonMaquinariaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMaquinariaMouseEntered
+        // TODO add your handling code here
+        setColor(BotonMaquinaria);
+    }//GEN-LAST:event_BotonMaquinariaMouseEntered
+
+    private void BotonMaquinariaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMaquinariaMouseExited
+        // TODO add your handling code here:
+        resetColor(BotonMaquinaria);
+    }//GEN-LAST:event_BotonMaquinariaMouseExited
+
+    public void cargarMaquinaria() {
+        DefaultTableModel model = (DefaultTableModel) this.tablaListadoMaquinaria.getModel();
+        model = (DefaultTableModel) this.tablaListadoMaquinaria.getModel();
+
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+        campoNombreYac.setText(nombYac);
+        Addfunc agregado = new Addfunc(nombYac);
+        Iteratorr iterador = agregado.createIterator();
+
+        Object[] Data = new Object[6];
+        while (iterador.isDone() == true) {
+            Maquina element = (Maquina) iterador.next();
+
+            Data[0] = element.getNombreMaquina();
+            Data[1] = element.getEstadoMaquina();
+            Data[2] = element.getIdMaquina();
+            model.addRow(Data);
+        }
+        /*Set listaMaquinaBD = mm.obtengoLista(nombYac);
+
+        Object[] fila;
+        Iterator<Maquina> it = listaMaquinaBD.iterator();
+        campoNombreYac.setText(nombYac);
+        while (it.hasNext()) {
+            fila = new Object[3];
+            Maquina element = it.next();
+
+            fila[0] = element.getNombreMaquina();
+            fila[1] = element.getEstadoMaquina();
+            fila[2] = element.getIdMaquina();
+
+            model.addRow(fila);
+        }*/
+    }
+
+    private void BotonMaquinariaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMaquinariaMousePressed
+        // TODO add your handling code here:
+        panelListadoYacimiento.setVisible(false);
+        panelMenuMaquinas.setVisible(true);
+
+    }//GEN-LAST:event_BotonMaquinariaMousePressed
+
+    private void botonMenuPozosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMenuPozosMouseEntered
+        // TODO add your handling code here:
+        setColor(botonMenuPozos);
+    }//GEN-LAST:event_botonMenuPozosMouseEntered
+
+    private void botonMenuPozosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMenuPozosMouseExited
+        // TODO add your handling code here:
+        resetColor(botonMenuPozos);
+    }//GEN-LAST:event_botonMenuPozosMouseExited
+
+    private void BotonMenuMaquinariaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuMaquinariaMouseEntered
+        // TODO add your handling code here:
+        setColor(BotonMenuMaquinaria);
+    }//GEN-LAST:event_BotonMenuMaquinariaMouseEntered
+
+    private void BotonMenuMaquinariaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuMaquinariaMouseExited
+        // TODO add your handling code here:
+        resetColor(BotonMenuMaquinaria);
+    }//GEN-LAST:event_BotonMenuMaquinariaMouseExited
+
+    private void BotonMenuMaquinariaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuMaquinariaMousePressed
+        // TODO add your handling code here:
+        panelMenuMaquinas.setVisible(false);
+        cargarMaquinaria();
+        panelListadoMaquinaria.setVisible(true);
+    }//GEN-LAST:event_BotonMenuMaquinariaMousePressed
+
+    private void BotonCantidadExtraidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCantidadExtraidaMouseEntered
+        // TODO add your handling code here:
+        setColor(BotonCantidadExtraida);
+    }//GEN-LAST:event_BotonCantidadExtraidaMouseEntered
+
+    private void BotonCantidadExtraidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCantidadExtraidaMouseExited
+        // TODO add your handling code here:
+        resetColor(BotonCantidadExtraida);
+    }//GEN-LAST:event_BotonCantidadExtraidaMouseExited
+    public int cargarPozosEnCombo(JComboBox aux) {
+        int cantidadPozos = 0;
+        Set listaPozoBD = mp.obtengoListaYac(nombYac);
+
+        Iterator<Pozo> it = listaPozoBD.iterator();
+        aux.removeAllItems();
+        while (it.hasNext()) {
+            String newEstado = "";
+            Pozo element = it.next();
+            // pregunto si el pozo esta activo y le asigno ese estado a newEstado
+            if (element.getEstado() == 1) {
+                newEstado = "Activo";
+                aux.addItem(element.getEquipo());  //este seria el ID Pozo
+
+                cantidadPozos += 1;
+            } else {
+                newEstado = "Inactivo";
+            }
+        }
+        return cantidadPozos;
+    }
+    private void BotonCantidadExtraidaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCantidadExtraidaMousePressed
+
+        campoNombreYacICE.setText(nombYac);
+        int res = cargarPozosEnCombo(nombrePozoICE);
+        if (res == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Ups! Parece que este yacimiento\nno tiene pozos registrados aun!");
+        } else {
+            panelAgregarCantidadExtraida.setVisible(true);
+            panelMenuPozo.setVisible(false);
+        }
+    }//GEN-LAST:event_BotonCantidadExtraidaMousePressed
+
+    private void botonAtrasMM1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAtrasMM1MousePressed
+        panelRegistrarIngreso.setVisible(false);
+        panelMenuPozo.setVisible(true);
+    }//GEN-LAST:event_botonAtrasMM1MousePressed
+
+    private void botonSalirMM1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMM1MousePressed
+        panelRegistrarIngreso.setVisible(false);
+        panelInicio.setVisible(true);
+        clean();
+    }//GEN-LAST:event_botonSalirMM1MousePressed
+
+    private void BotonListadoPozosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonListadoPozosMouseEntered
+        setColor(BotonListadoPozos);
+    }//GEN-LAST:event_BotonListadoPozosMouseEntered
+
+    private void BotonListadoPozosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonListadoPozosMouseExited
+        resetColor(BotonListadoPozos);
+    }//GEN-LAST:event_BotonListadoPozosMouseExited
+
+    private void BotonListadoPozosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonListadoPozosMousePressed
+        // TODO add your handling code here:
+        panelMenuPozo.setVisible(false);
+        cargarPozosEnTabla();
+        panelListadoPozo.setVisible(true);
+    }//GEN-LAST:event_BotonListadoPozosMousePressed
+
+    private void BotonIngresoPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonIngresoPMouseEntered
+        setColor(BotonIngresoP);
+    }//GEN-LAST:event_BotonIngresoPMouseEntered
+
+    private void BotonIngresoPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonIngresoPMouseExited
+        resetColor(BotonIngresoP);
+    }//GEN-LAST:event_BotonIngresoPMouseExited
+
+    private void BotonIngresoPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonIngresoPMousePressed
+        // TODO add your handling code here:
+        panelMenuPozo.setVisible(false);
+        panelRegistrarIngreso.setVisible(true);
+        cargarPozosEnCombo();
+        campoNombreYacimientoTrae.setText(nombYac);
+    }//GEN-LAST:event_BotonIngresoPMousePressed
+
+    private void campoBusquedaCamionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBusquedaCamionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoBusquedaCamionActionPerformed
+
+    private void minimizarButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizarButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minimizarButton1MouseClicked
+
+    private void expandirButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expandirButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_expandirButton1MouseClicked
+
+    private void botonAtrasIP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasIP1ActionPerformed
+        // TODO add your handling code here:
+        panelAgregarCantidadExtraida.setVisible(false);
+        panelMenuPozo.setVisible(true);
+    }//GEN-LAST:event_botonAtrasIP1ActionPerformed
+
+    private void botonCancelarIP1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCancelarIP1MousePressed
+        // TODO add your handling code here:
+        panelAgregarCantidadExtraida.setVisible(false);
+        //panelInicio.setVisible(true);
+        panelInicio.setVisible(true);
+    }//GEN-LAST:event_botonCancelarIP1MousePressed
+
+    private void botonIngresarCantidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIngresarCantidadMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonIngresarCantidadMouseClicked
+
+    private void botonMenuPozosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMenuPozosMousePressed
+        panelListadoYacimiento.setVisible(false);
+        panelMenuPozo.setVisible(true);
+
+    }//GEN-LAST:event_botonMenuPozosMousePressed
+
+    private void botonAtrasLMMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAtrasLMMousePressed
+        panelListadoMaquinaria.setVisible(false);
+        panelMenuMaquinas.setVisible(true);
+    }//GEN-LAST:event_botonAtrasLMMousePressed
+
+    private void botonSalirLMMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirLMMousePressed
+        panelListadoMaquinaria.setVisible(false);
+        panelInicio.setVisible(true);
+        clean();
+    }//GEN-LAST:event_botonSalirLMMousePressed
+
+    private void BotonSalirMYMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonSalirMYMousePressed
+        panelMenuYacimiento.setVisible(false);
+        panelInicio.setVisible(true);
+        clean();
+    }//GEN-LAST:event_BotonSalirMYMousePressed
+
+    private void jButton28MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton28MousePressed
+        panelMenuPozo.setVisible(false);
+        panelInicio.setVisible(true);
+    }//GEN-LAST:event_jButton28MousePressed
+
+    private void botonSalirLPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirLPMousePressed
+        panelListadoPozo.setVisible(false);
+        panelInicio.setVisible(true);
+        clean();
+    }//GEN-LAST:event_botonSalirLPMousePressed
+
+    private void botonAtrasIP1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAtrasIP1MousePressed
+        panelAgregarCantidadExtraida.setVisible(false);
+        panelMenuPozo.setVisible(true);
+    }//GEN-LAST:event_botonAtrasIP1MousePressed
+
+    private void botonCancelarIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarIPActionPerformed
+        panelAgregarPozo.setVisible(false);
+        panelInicio.setVisible(true);
+    }//GEN-LAST:event_botonCancelarIPActionPerformed
+
+    private void botonBuscarChofCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarChofCamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonBuscarChofCamActionPerformed
+
+    private void comboListadoPozosxYacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboListadoPozosxYacActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboListadoPozosxYacActionPerformed
+
+    private void campoNombreYacimientoTraeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreYacimientoTraeActionPerformed
+        //traer el valor del yacimiento seleccionado
+    }//GEN-LAST:event_campoNombreYacimientoTraeActionPerformed
+
+    public void muestraValores(int nroInterno, int nroIdCamion) {
+        Chofer choferAux = new Chofer();
+        Camion camAux = new Camion();
+
+        List<Integer> listaValores = new ArrayList();
+
+        listaValores = mchof.obtengoListaChoferXCamion(nroInterno, nroIdCamion);
+
+        choferAux = mchof.obtengoChofer(listaValores.get(0));
+        //System.out.println(listaValores.get(1));
+
+        camAux = mcam.obtengoCamion(listaValores.get(1));
+
+        campoDniChofer.setText(choferAux.getDNI());
+        campoNombreChofer.setText(choferAux.getNombre());
+        campoApellidoChofer.setText(choferAux.getApellido());
+        campoTelefonoChofer.setText(String.valueOf(choferAux.getTelefono()));
+
+        // System.out.println(camAux.getTipoCamion());
+        // System.out.println(camAux.getMercancia());
+        campoTipoCamion.setText(camAux.getTipoCamion());
+        campoTipoMercancia.setText(camAux.getMercancia());
+    }
+
+
+    private void botonBuscarChofCamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarChofCamMousePressed
+
+        // primero controlar que ambos campos esten completos
+        //luego controlar que traigan algun valor, sino mostrar cartel
+        int campoEstado = 0;
+
+        if (campoBusquedaChofer.getText().isEmpty() || campoBusquedaCamion.getText().isEmpty() || comboListadoPozosxYac.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Debe ingresar todos los datos");
+        } else {
+            //metodo de busqueda de datos de los choferes y camiones
+            muestraValores(Integer.parseInt(campoBusquedaChofer.getText()), Integer.parseInt(campoBusquedaCamion.getText()));
+
+        }
+
+        /*
+         yaux=my.ingresoDatos(CampoLocalización.getText(), campoEstado, CampoNombreYac.getText());
+         my.pasoDatos(yaux);
+         
+        panelAgregarYacimiento.setVisible(false);
+        panelMenuYacimiento.setVisible(true);
+         */
+    }//GEN-LAST:event_botonBuscarChofCamMousePressed
+
+    private void BotonRegistroIngresoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegistroIngresoMousePressed
+        // metodo para registrar el ingreso al pozo
+        //SimpleDateFormat formatoa = new SimpleDateFormat("yyyy/MM/dd");
+        //String fechaa = formatoa.format(fechaIngreso.getDate());
+        if (campoBusquedaChofer.getText().isEmpty() || campoBusquedaCamion.getText().isEmpty() || campoDniChofer.getText().isEmpty() || campoNombreChofer.getText().isEmpty()
+                || campoApellidoChofer.getText().isEmpty() || campoTelefonoChofer.getText().isEmpty() || campoTipoCamion.getText().isEmpty() || campoTipoCamion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "No se puede registrar ingreso, campos vacios");
+
+        } /*else if(mp.control(Integer.valueOf(campoBusquedaCamion.getText()), fechaa)==0) {
+            JOptionPane.showMessageDialog(rootPane, "Error, camion trabajando en esa fecha");
+        }        */ else {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+            String fecha = formato.format(fechaIngreso.getDate());
+            mp.registroIngreso(Integer.valueOf(campoBusquedaChofer.getText()), Integer.valueOf(campoBusquedaCamion.getText()), fecha);
+            //----------------RESET CAMPOS
+            campoBusquedaChofer.setText("");
+            campoBusquedaCamion.setText("");
+            campoDniChofer.setText("");
+            campoNombreChofer.setText("");
+            campoApellidoChofer.setText("");
+            campoTelefonoChofer.setText("");
+            campoTipoCamion.setText("");
+            campoTipoMercancia.setText("");
+
+        }
+    }//GEN-LAST:event_BotonRegistroIngresoMousePressed
+
+    private void cargarCamiones() {
+        DefaultTableModel model = (DefaultTableModel) this.tablaListadoMaquinaria1.getModel();
+        model = (DefaultTableModel) this.tablaListadoMaquinaria1.getModel();
+
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+
+        Set listacamionesBD = mcam.obtengoLista();
+
+        Object[] fila;
+        Iterator<Camion> it = listacamionesBD.iterator();
+        while (it.hasNext()) {
+            fila = new Object[5];
+            Camion element = it.next();
+            fila[0] = element.getMercancia();
+            fila[1] = element.getTipoCamion();
+            fila[2] = element.getHorasServicio();
+            fila[3] = element.getFechaInicioServicio();
+            fila[4] = element.getFechaFinServicio();
+
+            model.addRow(fila);
+        }
+    }
+    private void BotonMenuEmpleados3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuEmpleados3MousePressed
+
+    }//GEN-LAST:event_BotonMenuEmpleados3MousePressed
+
+    private void botonAtrasLM1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAtrasLM1MousePressed
+        panelListadoCamiones.setVisible(false);
+        panelMenuPrincipal.setVisible(true);
+    }//GEN-LAST:event_botonAtrasLM1MousePressed
+
+    private void tablaListadoMaquinaria1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaListadoMaquinaria1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaListadoMaquinaria1MouseClicked
+
+    private void jScrollPane4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane4MouseClicked
+
+    private void botonSalirLM1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirLM1MousePressed
+        panelListadoCamiones.setVisible(false);
+        panelInicio.setVisible(true);
+        clean();
+    }//GEN-LAST:event_botonSalirLM1MousePressed
+
+    private void BotonMenuCamionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMenuCamionesMousePressed
+        panelMenuPrincipal.setVisible(false);
+        cargarCamiones();
+        panelListadoCamiones.setVisible(true);
+    }//GEN-LAST:event_BotonMenuCamionesMousePressed
+
+    private void CampoNombreYacKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoNombreYacKeyTyped
+        char validar = evt.getKeyChar();
+
+        if (CampoNombreYac.getText().length() >= 6) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_CampoNombreYacKeyTyped
+
+    private void CampoLocalizaciónKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoLocalizaciónKeyTyped
+        char validar = evt.getKeyChar();
+
+        if (Character.isDigit(validar)) {
+            evt.consume();
+        }
+        if (CampoLocalización.getText().length() >= 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_CampoLocalizaciónKeyTyped
+
+    private void equipoPozoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_equipoPozoKeyTyped
+        char validar = evt.getKeyChar();
+
+        if (equipoPozo.getText().length() >= 6) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_equipoPozoKeyTyped
+
+    private void campoBusquedaChoferKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBusquedaChoferKeyTyped
+        char validar = evt.getKeyChar();
+
+        if (!Character.isDigit(validar)) {
+            evt.consume();
+        }
+        if (campoBusquedaChofer.getText().length() >= 6) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_campoBusquedaChoferKeyTyped
+
+    private void campoBusquedaCamionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBusquedaCamionKeyTyped
+        char validar = evt.getKeyChar();
+
+        if (!Character.isDigit(validar)) {
+            evt.consume();
+        }
+        if (campoBusquedaCamion.getText().length() >= 6) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_campoBusquedaCamionKeyTyped
+
+    private void botonIngresarCantidadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIngresarCantidadMousePressed
+        Pozo paux = new Pozo();
+        if ((nombrePozoICE.getSelectedItem().toString() == null) || campoCantidadExtraidaICE.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "No se puede registrar nueva cantidad, algunos campos estan vacios");
+        } else {
+            if (Integer.parseInt(campoCantidadExtraidaICE.getText()) < 0) {
+                JOptionPane.showMessageDialog(rootPane, "No se puede registrar una cantidad negativa! Cuidado!");
+            } else {
+                //SimpleDateFormat ffecha = new SimpleDateFormat("yyyy/MM/dd");
+                //String dateToday = ffecha.format(fechaIngreso.getDate());
+                mp.modifyCantExtraida(nombrePozoICE.getSelectedItem().toString(), Integer.valueOf(campoCantidadExtraidaICE.getText()));
+
+                campoCantidadExtraidaICE.setText("");
+            }
+
+        }
+    }//GEN-LAST:event_botonIngresarCantidadMousePressed
+
+    private void BotonIngresarYacimientoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonIngresarYacimientoMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonIngresarYacimientoMousePressed
+
+    private void campoCantidadExtraidaICEKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCantidadExtraidaICEKeyTyped
+        char validar = evt.getKeyChar();
+        if (!Character.isDigit(validar)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_campoCantidadExtraidaICEKeyTyped
+
+    private void BotonCancelarIngYacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarIngYacActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonCancelarIngYacActionPerformed
+
+    private void botonSalirMM1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirMM1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSalirMM1ActionPerformed
+
+    
+    /*
+    String contraUsuario = DigestUtils.md5Hex(CampoPass.getText());
+    // cargar en la database
+    */
+    
     private void BotonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BotonIniciarSesionActionPerformed
         // inicioDeSesion();
         Supervisor supLogin = new Supervisor("Admin", "Admin", "", "", "", 0, "", "", 0);
@@ -1891,77 +3287,29 @@ public class TSBVentana extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_BotonIniciarSesionActionPerformed
 
-    private void BotonRegistrarseMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonRegistrarseMousePressed
-        // RegistrarAdminXprimeraVez registrar = new
-        // RegistrarAdminXprimeraVez(listaUsuarios);
-        // registrar.setVisible(true);
-        this.dispose();
-    }// GEN-LAST:event_BotonRegistrarseMousePressed
-
-    private void CampoUsuarioKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoUsuarioKeyPressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_CampoUsuarioKeyPressed
-
-    private void CampoUsuarioKeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoUsuarioKeyTyped
-        // TODO add your handling code here:
-    }// GEN-LAST:event_CampoUsuarioKeyTyped
-
-    private void CampoNombreYacKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoNombreYacKeyPressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_CampoNombreYacKeyPressed
-
-    private void CampoNombreYacKeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoNombreYacKeyTyped
-        // TODO add your handling code here:
-    }// GEN-LAST:event_CampoNombreYacKeyTyped
-
-    private void CampoLocalizaciónKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoLocalizaciónKeyPressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_CampoLocalizaciónKeyPressed
-
-    private void CampoLocalizaciónKeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoLocalizaciónKeyTyped
-        // TODO add your handling code here:
-    }// GEN-LAST:event_CampoLocalizaciónKeyTyped
-
-    private void CampoLocalizaciónActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CampoLocalizaciónActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_CampoLocalizaciónActionPerformed
-
     private void BotonIngresarYacimientoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BotonIngresarYacimientoActionPerformed
         // TODO add your handling code here:
-        Yacimiento aux = new Yacimiento();
         int campoEstado = 0;
-
+        Yacimiento yaux = new Yacimiento();
         if (CampoNombreYac.getText().isEmpty() || CampoLocalización.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Debe ingresar todos los datos");
-        }
-        if (comboEstadoYac.getSelectedItem().equals("Activo")) {
-            campoEstado = 1;
         } else {
-            campoEstado = 0;
+            if (comboEstadoYac.getSelectedItem().equals("Activo")) {
+                campoEstado = 1;
+            } else {
+                campoEstado = 0;
+            }
+            yaux = my.ingresoDatos(CampoLocalización.getText(), campoEstado, CampoNombreYac.getText().toUpperCase());
+            my.pasoDatos(yaux);
+           
+            panelAgregarYacimiento.setVisible(false);
+            panelMenuYacimiento.setVisible(true);
         }
-
-        aux = my.ingresoDatos(CampoLocalización.getText(), campoEstado, CampoNombreYac.getText());
-
-        yd.create(aux);
-        panelAgregarYacimiento.setVisible(false);
-        panelMenuYacimiento.setVisible(true);
+//----------------RESET CAMPOS
+        CampoNombreYac.setText("");
+        CampoLocalización.setText("");
+        comboEstadoYac.setSelectedItem("Activo");
     }// GEN-LAST:event_BotonIngresarYacimientoActionPerformed
-
-    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton22ActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jButton22ActionPerformed
-
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton23ActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jButton23ActionPerformed
-
-    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton24ActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jButton24ActionPerformed
-
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton25ActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jButton25ActionPerformed
 
     private void botonAtrasIPActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonAtrasIPActionPerformed
         // TODO add your handling code here:
@@ -1969,66 +3317,28 @@ public class TSBVentana extends javax.swing.JFrame {
         panelMenuYacimiento.setVisible(true);
     }// GEN-LAST:event_botonAtrasIPActionPerformed
 
-    private void CampoNombreYac3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CampoNombreYac3ActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_CampoNombreYac3ActionPerformed
+//------------------------------BOTON MENU YACIMIENTO---------------------------
+    private void BotonMenuYacimientoMouseEntered(java.awt.event.MouseEvent evt) {
+        setColor(BotonMenuYacimiento);
+    }
 
-    private void CampoNombreYac3KeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoNombreYac3KeyPressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_CampoNombreYac3KeyPressed
-
-    private void CampoNombreYac3KeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_CampoNombreYac3KeyTyped
-        // TODO add your handling code here:
-    }// GEN-LAST:event_CampoNombreYac3KeyTyped
-
-    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton33ActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jButton33ActionPerformed
-
-    private void BotonMenuEmpleadosMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuEmpleadosMouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuEmpleadosMouseEntered
-
-    private void BotonMenuEmpleadosMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuEmpleadosMouseExited
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuEmpleadosMouseExited
-
-    private void BotonMenuEmpleadosMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuEmpleadosMousePressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuEmpleadosMousePressed
-
-    private void BotonMenuClientesMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuClientesMouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuClientesMouseEntered
-
-    private void BotonMenuClientesMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuClientesMouseExited
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuClientesMouseExited
-
-    private void BotonMenuClientesMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuClientesMousePressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuClientesMousePressed
-
-    private void BotonMenuYacimientoMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuYacimientoMouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuYacimientoMouseEntered
-
-    private void BotonMenuYacimientoMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuYacimientoMouseExited
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuYacimientoMouseExited
+    private void BotonMenuYacimientoMouseExited(java.awt.event.MouseEvent evt) {
+        resetColor(BotonMenuYacimiento);
+    }
 
     private void BotonMenuYacimientoMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuYacimientoMousePressed
         // TODO add your handling code here:
         panelMenuPrincipal.setVisible(false);
         panelMenuYacimiento.setVisible(true);
     }// GEN-LAST:event_BotonMenuYacimientoMousePressed
+//------------------------------BOTON LISTADO YACIMIENTO---------------------------
 
     private void BotonListadoYacimientoMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoYacimientoMouseEntered
-        // TODO add your handling code here:
+        setColor(BotonListadoYacimiento);
     }// GEN-LAST:event_BotonListadoYacimientoMouseEntered
 
     private void BotonListadoYacimientoMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoYacimientoMouseExited
-        // TODO add your handling code here:
+        resetColor(BotonListadoYacimiento);
     }// GEN-LAST:event_BotonListadoYacimientoMouseExited
 
     //cargar yacimientos en la fila
@@ -2039,7 +3349,7 @@ public class TSBVentana extends javax.swing.JFrame {
         modelo.getDataVector().removeAllElements();
         modelo.fireTableDataChanged();
 
-        Set listaYacimientoBD = yd.getDAO();
+        Set listaYacimientoBD = my.obtengoLista();
 
         Object[] fila;
         Iterator<Yacimiento> it = listaYacimientoBD.iterator();
@@ -2067,13 +3377,14 @@ public class TSBVentana extends javax.swing.JFrame {
         cargarDatos();
         panelListadoYacimiento.setVisible(true);
     }// GEN-LAST:event_BotonListadoYacimientoMousePressed
+//------------------------------BOTON AGREGAR YACIMIENTO---------------------------
 
     private void BotonAgregarYacimientoMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonAgregarYacimientoMouseEntered
-        // TODO add your handling code here:
+        setColor(BotonAgregarYacimiento);
     }// GEN-LAST:event_BotonAgregarYacimientoMouseEntered
 
     private void BotonAgregarYacimientoMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonAgregarYacimientoMouseExited
-        // TODO add your handling code here:
+        resetColor(BotonAgregarYacimiento);
     }// GEN-LAST:event_BotonAgregarYacimientoMouseExited
 
     private void BotonAgregarYacimientoMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonAgregarYacimientoMousePressed
@@ -2081,23 +3392,24 @@ public class TSBVentana extends javax.swing.JFrame {
         panelMenuYacimiento.setVisible(false);
         panelAgregarYacimiento.setVisible(true);
     }// GEN-LAST:event_BotonAgregarYacimientoMousePressed
+//------------------------------BOTON AGREGAR POZOS---------------------------
 
     private void BotonAgregarPozoMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonAgregarPozoMouseEntered
-        // TODO add your handling code here:
+        setColor(BotonAgregarPozo);
     }// GEN-LAST:event_BotonAgregarPozoMouseEntered
 
     private void BotonAgregarPozoMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonAgregarPozoMouseExited
-        // TODO add your handling code here:
+        resetColor(BotonAgregarPozo);
     }// GEN-LAST:event_BotonAgregarPozoMouseExited
 
     //metodo que se usa en el boton de abajo
     private void listaYacimientosCargada() {
-        Set listaYacimientoBD = yd.getDAO();
+        Set listaYacimientoBD = my.obtengoLista();
         Iterator<Yacimiento> it = listaYacimientoBD.iterator();
         yacimientoDePozo.removeAllItems();
         while (it.hasNext()) {
             Yacimiento element = it.next();
-            if(element.getEstadoYacimiento() == 1){
+            if (element.getEstadoYacimiento() == 1) {
                 yacimientoDePozo.addItem(element.getNombreYacimiento());
             }
         }
@@ -2109,42 +3421,6 @@ public class TSBVentana extends javax.swing.JFrame {
         panelAgregarPozo.setVisible(true);
         listaYacimientosCargada();
     }// GEN-LAST:event_BotonAgregarPozoMousePressed
-
-    private void BotonListadoFacturas9MouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoFacturas9MouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonListadoFacturas9MouseEntered
-
-    private void BotonListadoFacturas9MouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoFacturas9MouseExited
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonListadoFacturas9MouseExited
-
-    private void BotonListadoFacturas9MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoFacturas9MousePressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonListadoFacturas9MousePressed
-
-    private void BotonListadoFacturas10MouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoFacturas10MouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonListadoFacturas10MouseEntered
-
-    private void BotonListadoFacturas10MouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoFacturas10MouseExited
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonListadoFacturas10MouseExited
-
-    private void BotonListadoFacturas10MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoFacturas10MousePressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonListadoFacturas10MousePressed
-
-    private void BotonListadoFacturas11MouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoFacturas11MouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonListadoFacturas11MouseEntered
-
-    private void BotonListadoFacturas11MouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoFacturas11MouseExited
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonListadoFacturas11MouseExited
-
-    private void BotonListadoFacturas11MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonListadoFacturas11MousePressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonListadoFacturas11MousePressed
 
     private void botonSalirMenuPActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonSalirMenuPActionPerformed
         // sale del sistema
@@ -2160,7 +3436,7 @@ public class TSBVentana extends javax.swing.JFrame {
         // TODO add your handling code here:
         panelMenuYacimiento.setVisible(false);
         panelMenuPrincipal.setVisible(true);
-
+        clean();
     }// GEN-LAST:event_BotonSalirMYActionPerformed
 
     private void botonAtrasMYActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonAtrasMYActionPerformed
@@ -2172,7 +3448,7 @@ public class TSBVentana extends javax.swing.JFrame {
     private void BotonCancelarIngYacMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonCancelarIngYacMousePressed
         // TODO add your handling code here:
         panelAgregarYacimiento.setVisible(false);
-        panelMenuYacimiento.setVisible(true);
+        panelInicio.setVisible(true);
     }// GEN-LAST:event_BotonCancelarIngYacMousePressed
 
     private void botonAtrasIngYacMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_botonAtrasIngYacMousePressed
@@ -2184,7 +3460,8 @@ public class TSBVentana extends javax.swing.JFrame {
     private void botonSalirLYMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_botonSalirLYMousePressed
         // TODO add your handling code here:
         panelListadoYacimiento.setVisible(false);
-        panelMenuYacimiento.setVisible(true);
+        panelInicio.setVisible(true);
+        clean();
     }// GEN-LAST:event_botonSalirLYMousePressed
 
     private void botonAtrasLYMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_botonAtrasLYMousePressed
@@ -2197,6 +3474,7 @@ public class TSBVentana extends javax.swing.JFrame {
         // TODO add your handling code here:
         panelListadoPozo.setVisible(false);
         panelListadoYacimiento.setVisible(true);
+
     }// GEN-LAST:event_botonSalirLPActionPerformed
 
     private void botonAtrasLPActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botonAtrasLPActionPerformed
@@ -2215,38 +3493,6 @@ public class TSBVentana extends javax.swing.JFrame {
 
     }// GEN-LAST:event_jScrollPane1MouseClicked
 
-    private void BotonMenuYacimiento1MouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuYacimiento1MouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuYacimiento1MouseEntered
-
-    private void BotonMenuYacimiento1MouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuYacimiento1MouseExited
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuYacimiento1MouseExited
-
-    private void BotonMenuYacimiento1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuYacimiento1MousePressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuYacimiento1MousePressed
-
-    private void BotonMenuEmpleados1MouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuEmpleados1MouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuEmpleados1MouseEntered
-
-    private void BotonMenuEmpleados1MouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuEmpleados1MouseExited
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuEmpleados1MouseExited
-
-    private void BotonMenuEmpleados1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonMenuEmpleados1MousePressed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonMenuEmpleados1MousePressed
-
-    private void BotonAMenuPMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonAMenuPMouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonAMenuPMouseEntered
-
-    private void BotonAMenuPMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonAMenuPMouseExited
-        // TODO add your handling code here:
-    }// GEN-LAST:event_BotonAMenuPMouseExited
-
     //Codigo YACIMIENTO
     private void BotonAMenuPMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_BotonAMenuPMousePressed
         // TODO add your handling code here:
@@ -2262,6 +3508,7 @@ public class TSBVentana extends javax.swing.JFrame {
         // Capturo el yacimiento seleccionado en la tabla
         int seleccion = jTable1.rowAtPoint(evt.getPoint());
         nombYac = (String) jTable1.getValueAt(seleccion, 1);
+        System.out.println(nombYac);
         return nombYac;
     }// GEN-LAST:event_jTable1MouseClicked
 
@@ -2309,68 +3556,150 @@ public class TSBVentana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BotonAcciones;
     private javax.swing.JPanel BotonAgregarPozo;
     private javax.swing.JPanel BotonAgregarYacimiento;
     private javax.swing.JButton BotonCancelarIngYac;
+    private javax.swing.JPanel BotonCantidadExtraida;
+    private javax.swing.JPanel BotonEgresoP;
+    private javax.swing.JPanel BotonEstadisticas;
     private javax.swing.JButton BotonIngresarYacimiento;
+    private javax.swing.JPanel BotonIngresoP;
     private javax.swing.JButton BotonIniciarSesion;
-    private javax.swing.JPanel BotonListadoFacturas10;
-    private javax.swing.JPanel BotonListadoFacturas11;
-    private javax.swing.JPanel BotonListadoFacturas9;
+    private javax.swing.JPanel BotonListadoPozos;
     private javax.swing.JPanel BotonListadoYacimiento;
+    private javax.swing.JPanel BotonMaquinaria;
     private javax.swing.JPanel BotonMenuCamiones;
     private javax.swing.JPanel BotonMenuClientes;
     private javax.swing.JPanel BotonMenuContratos;
     private javax.swing.JPanel BotonMenuEmpleados;
-    private javax.swing.JPanel BotonMenuEmpleados1;
+    private javax.swing.JPanel BotonMenuEmpleados3;
+    private javax.swing.JPanel BotonMenuMaquinaria;
     private javax.swing.JPanel BotonMenuMaquinas;
     private javax.swing.JPanel BotonMenuYacimiento;
-    private javax.swing.JPanel BotonMenuYacimiento1;
+    private javax.swing.JPanel BotonModStock;
     private javax.swing.JLabel BotonRegistrarse;
+    private javax.swing.JButton BotonRegistroIngreso;
     private javax.swing.JButton BotonSalirMY;
     private javax.swing.JTextField CampoLocalización;
     private javax.swing.JTextField CampoNombreYac;
     private javax.swing.JTextField CampoPass;
     private javax.swing.JTextField CampoUsuario;
     private javax.swing.JButton botonAtrasIP;
+    private javax.swing.JButton botonAtrasIP1;
     private javax.swing.JButton botonAtrasIngYac;
+    private javax.swing.JButton botonAtrasLM;
+    private javax.swing.JButton botonAtrasLM1;
     private javax.swing.JButton botonAtrasLY;
+    private javax.swing.JButton botonAtrasMM;
+    private javax.swing.JButton botonAtrasMM1;
     private javax.swing.JButton botonAtrasMY;
+    private javax.swing.JButton botonBuscarChofCam;
     private javax.swing.JButton botonCancelarIP;
+    private javax.swing.JButton botonCancelarIP1;
+    private javax.swing.JPanel botonEliminarPozo;
+    private javax.swing.JButton botonIngresarCantidad;
+    private javax.swing.JPanel botonMenuPozos;
+    private javax.swing.JPanel botonModificarPozo;
+    private javax.swing.JButton botonSalirLM;
+    private javax.swing.JButton botonSalirLM1;
     private javax.swing.JButton botonSalirLP;
     private javax.swing.JButton botonSalirLY;
+    private javax.swing.JButton botonSalirMM;
+    private javax.swing.JButton botonSalirMM1;
     private javax.swing.JButton botonSalirMenuP;
+    private javax.swing.JTextField campoApellidoChofer;
+    private javax.swing.JTextField campoBusquedaCamion;
+    private javax.swing.JTextField campoBusquedaChofer;
+    private javax.swing.JTextField campoCantidadExtraidaICE;
+    private javax.swing.JTextField campoDniChofer;
+    private javax.swing.JTextField campoNombreChofer;
+    private javax.swing.JTextField campoNombreYac;
+    private javax.swing.JTextField campoNombreYacICE;
+    private javax.swing.JTextField campoNombreYacimientoTrae;
+    private javax.swing.JTextField campoTelefonoChofer;
+    private javax.swing.JTextField campoTipoCamion;
+    private javax.swing.JTextField campoTipoMercancia;
     private javax.swing.JComboBox<String> comboEstadoYac;
+    private javax.swing.JComboBox<String> comboListadoPozosxYac;
     private javax.swing.JTextField equipoPozo;
     private javax.swing.JComboBox<String> estadoPozo;
     private javax.swing.JLabel expandirButton;
+    private javax.swing.JLabel expandirButton1;
+    private com.toedter.calendar.JDateChooser fechaIngreso;
     private javax.swing.JButton ingresarPozoButton;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton28;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel100;
+    private javax.swing.JLabel jLabel101;
+    private javax.swing.JLabel jLabel102;
+    private javax.swing.JLabel jLabel103;
+    private javax.swing.JLabel jLabel104;
+    private javax.swing.JLabel jLabel105;
+    private javax.swing.JLabel jLabel106;
+    private javax.swing.JLabel jLabel107;
+    private javax.swing.JLabel jLabel108;
+    private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel110;
+    private javax.swing.JLabel jLabel111;
+    private javax.swing.JLabel jLabel112;
+    private javax.swing.JLabel jLabel113;
+    private javax.swing.JLabel jLabel114;
+    private javax.swing.JLabel jLabel115;
+    private javax.swing.JLabel jLabel116;
+    private javax.swing.JLabel jLabel117;
+    private javax.swing.JLabel jLabel118;
+    private javax.swing.JLabel jLabel119;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel120;
+    private javax.swing.JLabel jLabel121;
+    private javax.swing.JLabel jLabel122;
+    private javax.swing.JLabel jLabel123;
+    private javax.swing.JLabel jLabel124;
+    private javax.swing.JLabel jLabel125;
+    private javax.swing.JLabel jLabel126;
+    private javax.swing.JLabel jLabel127;
+    private javax.swing.JLabel jLabel129;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel130;
+    private javax.swing.JLabel jLabel131;
+    private javax.swing.JLabel jLabel132;
+    private javax.swing.JLabel jLabel133;
+    private javax.swing.JLabel jLabel134;
+    private javax.swing.JLabel jLabel135;
+    private javax.swing.JLabel jLabel136;
+    private javax.swing.JLabel jLabel137;
+    private javax.swing.JLabel jLabel138;
+    private javax.swing.JLabel jLabel139;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel140;
+    private javax.swing.JLabel jLabel141;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
@@ -2406,6 +3735,8 @@ public class TSBVentana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
@@ -2422,21 +3753,45 @@ public class TSBVentana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
+    private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
+    private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel88;
     private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel90;
     private javax.swing.JLabel jLabel91;
     private javax.swing.JLabel jLabel92;
+    private javax.swing.JLabel jLabel93;
     private javax.swing.JLabel jLabel94;
+    private javax.swing.JLabel jLabel95;
+    private javax.swing.JLabel jLabel96;
+    private javax.swing.JLabel jLabel97;
+    private javax.swing.JLabel jLabel98;
+    private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -2446,11 +3801,11 @@ public class TSBVentana extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton listadoPozoAtrasButton;
-    private javax.swing.JButton listadoPozoDELETEButton;
-    private javax.swing.JButton listadoPozoMODIFYButton;
     private javax.swing.JLabel maximizar00Button;
     private javax.swing.JLabel mazimizar0Button;
     private javax.swing.JLabel mazimizar1Button;
@@ -2458,18 +3813,24 @@ public class TSBVentana extends javax.swing.JFrame {
     private javax.swing.JLabel minimizar0Button;
     private javax.swing.JLabel minimizar1Button;
     private javax.swing.JLabel minimizarButton;
+    private javax.swing.JLabel minimizarButton1;
+    private javax.swing.JComboBox<String> nombrePozoICE;
+    private javax.swing.JPanel panelAgregarCantidadExtraida;
     private javax.swing.JPanel panelAgregarPozo;
     private javax.swing.JPanel panelAgregarYacimiento;
-    private javax.swing.JPanel panelAzulingresoPozo;
-    private javax.swing.JPanel panelContenidoIngresoPozo;
     private javax.swing.JPanel panelInicio;
+    private javax.swing.JPanel panelListadoCamiones;
+    private javax.swing.JPanel panelListadoMaquinaria;
     private javax.swing.JPanel panelListadoPozo;
     private javax.swing.JPanel panelListadoYacimiento;
+    private javax.swing.JPanel panelMenuMaquinas;
     private javax.swing.JPanel panelMenuPozo;
     private javax.swing.JPanel panelMenuPrincipal;
     private javax.swing.JPanel panelMenuYacimiento;
-    private javax.swing.JPanel pozosDeYacimientoButton;
+    private javax.swing.JPanel panelRegistrarIngreso;
     private javax.swing.JTable pozosDeYacimientosTable;
+    private javax.swing.JTable tablaListadoMaquinaria;
+    private javax.swing.JTable tablaListadoMaquinaria1;
     private javax.swing.JComboBox<String> yacimientoDePozo;
     // End of variables declaration//GEN-END:variables
 }

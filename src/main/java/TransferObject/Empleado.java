@@ -1,32 +1,32 @@
 package TransferObject;
 
 public class Empleado {
+    private int numInterno;
     private String nombre;
     private String apellido;
     private String DNI;
     private int estado;
+    private int telefono;
     private String diagrama;
-    private String telefono;
-    private int numInterno;
 
     public Empleado() {
-        this.nombre = "null";
-        this.apellido = "null";
-        this.DNI = "null";
-        this.estado = 0;
-        this.diagrama = "null";
-        this.telefono = "null";
-        this.numInterno = 0;
     }
 
-    public Empleado(String nombre, String apellido, String DNI, int estado, String diagrama, String telefono,
-            int numInterno) {
+    public Empleado(int numInterno, String nombre, String apellido, String DNI, int estado, int telefono, String diagrama) {
+        this.numInterno = numInterno;
         this.nombre = nombre;
         this.apellido = apellido;
         this.DNI = DNI;
         this.estado = estado;
-        this.diagrama = diagrama;
         this.telefono = telefono;
+        this.diagrama = diagrama;
+    }
+
+    public int getNumInterno() {
+        return numInterno;
+    }
+
+    public void setNumInterno(int numInterno) {
         this.numInterno = numInterno;
     }
 
@@ -62,6 +62,14 @@ public class Empleado {
         this.estado = estado;
     }
 
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
     public String getDiagrama() {
         return diagrama;
     }
@@ -69,21 +77,6 @@ public class Empleado {
     public void setDiagrama(String diagrama) {
         this.diagrama = diagrama;
     }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public int getNumInterno() {
-        return numInterno;
-    }
-
-    public void setNumInterno(int numInterno) {
-        this.numInterno = numInterno;
-    }
+    
 
 }

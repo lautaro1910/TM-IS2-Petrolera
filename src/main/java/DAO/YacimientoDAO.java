@@ -1,4 +1,3 @@
-
 package DAO;
 
 import ConectionBD.Conection_BD;
@@ -10,6 +9,7 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 
 public class YacimientoDAO {
+
     private Conection_BD db;
     private Set<Yacimiento> listaYacimientos = new HashSet<Yacimiento>();
 
@@ -78,12 +78,18 @@ public class YacimientoDAO {
     public void create(Yacimiento yacimiento) {
         try {
             this.db.conectar();
-            String sentenciaSQL = new String();
-            sentenciaSQL = "INSERT INTO public.yacimiento(nombreYacimiento, localizacionOrigen, estadoYacimiento)";
-            sentenciaSQL = sentenciaSQL + " VALUES ('" + yacimiento.getNombreYacimiento() + "','"
-                    + yacimiento.getLocalizacionOrigen() + "'," + yacimiento.getEstadoYacimiento() + ")";
-            this.db.statement(sentenciaSQL);
-            sentenciaSQL = null;
+            if (db.ifExists("SELECT 1 FROM yacimiento where yacimiento.nombreyacimiento = ?;", yacimiento.getNombreYacimiento())) {
+                JOptionPane.showMessageDialog(null, "Error, ya existe el yacimiento!");
+            } else {
+                String sentenciaSQL = new String();
+                sentenciaSQL = "INSERT INTO public.yacimiento(nombreYacimiento, localizacionOrigen, estadoYacimiento)";
+                sentenciaSQL = sentenciaSQL + " VALUES ('" + yacimiento.getNombreYacimiento() + "','"
+                        + yacimiento.getLocalizacionOrigen() + "'," + yacimiento.getEstadoYacimiento() + ")";
+                this.db.statement(sentenciaSQL);
+                JOptionPane.showMessageDialog(null, "Operacion exitosa!");
+                sentenciaSQL = null;
+            }
+
             this.db.cerrarConexion();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error al cargar los datos: " + ex);// mostrar el Error

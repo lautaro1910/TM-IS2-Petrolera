@@ -6,7 +6,7 @@ public class Pozo {
     // private String tipoProducto; //codificado. 1=agua sucia, 0=petroleummm O suponemos todo petroleo?
     private String equipo;
     private int estadoPozo;
-    private String nombreSuYacimiento;
+    private String nombreSuYacimiento;   //cambiar a pozo
 
     
     public Pozo(){
